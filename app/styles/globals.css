@@ -97,9 +97,10 @@ html, body {
   font-size: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 6px;
-  background-color: #f5faff;
+  background-color: #ffffff00;
   font-family: poppins, sans-serif;
   font-weight:300
+  
 }
 
 .form-options {
