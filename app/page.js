@@ -7,7 +7,7 @@ export default function Home() {
 
   return (
     <div className="video-container">
-      {/*backgroundvideo*/}
+      {/*background__svideo*/}
       <video autoPlay muted loop playsInline className="background-video">
         <source src="/backgroundVideo.mp4" type="video/mp4" />
       </video>
