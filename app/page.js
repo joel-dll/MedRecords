@@ -1,15 +1,17 @@
 'use client';
 import './styles/globals.css';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { auth, googleProvider } from './lib/firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signOut,
 } from 'firebase/auth';
 
 export default function Home() {
+  const router = useRouter();
+
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,15 +26,15 @@ export default function Home() {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         console.log('User signed up:', userCredential.user);
         alert('Account created successfully!');
-        
+        router.push('/dashboard');
       } else {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         console.log('User signed in:', userCredential.user);
         alert('Signed in successfully!');
+        router.push('/dashboard'); 
       }
     } catch (error) {
       console.error('Auth error:', error.code, error.message);
-
       if (error.code === 'auth/email-already-in-use') {
         alert('This email is already registered. Try logging in instead.');
         setIsSignUp(false);
@@ -48,6 +50,7 @@ export default function Home() {
       const user = result.user;
       console.log('Google user:', user);
       alert(`Signed in as ${user.email}`);
+      router.push('/dashboard'); 
     } catch (error) {
       console.error('Google sign-in error:', error.code, error.message);
       alert('Google sign-in failed: ' + error.message);

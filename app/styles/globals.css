@@ -44,8 +44,6 @@ html, body {
   
 }
 
-  
-
 .branding {
   color: #000;
   padding-left: 4rem;
@@ -228,4 +226,229 @@ html, body {
   font-family: 'Courier New', monospace;
   font-size: 0.8rem;
   color: #4a6a67;
+}
+
+
+.body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url('/background2.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; 
+  padding: 2rem;
+}
+
+.dashboard-logo {
+  font-size: 3rem;
+  color: #333;
+  font-family: poppins, sans-serif;
+  font-weight: 200;
+}
+.dashboard-nav {
+  margin-top: 80px; 
+}
+
+
+.dashboard-nav a {
+  margin: 0 2rem;
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #4f4f4f;
+  font-family: Poppins, sans-serif;
+  font-weight: 200;
+  
+}
+
+.dashboard-nav a:hover {
+  color: #7cb1a6; 
+  
+  cursor: pointer;
+  font-weight: 300;
+}
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #666;
+  background: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 200;
+  font-family: poppins, sans-serif;
+}
+.logout-button:hover {
+  background-color: #4da6a6;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 3rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  margin: 2rem;
+  border-radius: 12px;
+}
+
+
+
+
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.newsletter-input {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter-button {
+  padding: 0.5rem;
+  background-color: #4da6a6;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.footer-services li {
+  list-style: none;
+  margin: 0.25rem 0;
+}
+
+.dashboard-footer {
+  background-color: #1c2a33;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.7rem 30rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+  font-size: 0.60rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+
+.footer-column h4 {
+  display: inline;
+  font-weight: 400;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.footer-column h4:hover {
+  color: #83d0c9;
+ 
+  cursor: pointer;
+}
+
+
+
+
+
+
+.pop-up-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.pop-up {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 8%;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 0.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.pop-up h2 {
+  margin-top: 0;
+  font-weight: 200;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.pop-up form,
+.pop-up ul {
+  margin-top: 1rem;
+}
+
+.pop-up input,
+.pop-up textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.pop-up button {
+  padding: 0.6rem 1.2rem;
+  background-color: #4da6a6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 400;
+  cursor: pointer;
 }
