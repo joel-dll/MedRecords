@@ -452,3 +452,17 @@ html, body {
   font-weight: 400;
   cursor: pointer;
 }
+
+.popup-message {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.popup-message h2 {
+  margin-bottom: 0.5rem;
+}
+
+.popup-message button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+}

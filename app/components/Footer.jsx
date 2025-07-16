@@ -43,12 +43,12 @@ export default function Footer({ show }) {
               email,
               subscribedAt: Timestamp.now(),
             });
-            alert('Thank you for subscribing!');
             e.target.reset();
-            closePopUp();     
+            setPopUpType('successMessageNewsletter');
+                 
           } catch (error) {
             console.error('Error subscribing:', error);
-            alert('There was a problem. Please try again later.');
+            setPopUpType('errorMessageNewsletter');
           }
         }}
       >
@@ -71,28 +71,27 @@ export default function Footer({ show }) {
       <form
         className="contact-form"
         onSubmit={async (e) => {
-          e.preventDefault();
+            e.preventDefault();
 
-          const name = e.target.name.value;
-          const email = e.target.email.value;
-          const message = e.target.message.value;
+            const name = e.target.name.value;
+            const email = e.target.email.value;
+            const message = e.target.message.value;
 
-          try {
+            try {
             await addDoc(collection(db, 'contactMessages'), {
-              name,
-              email,
-              message,
-              sentAt: Timestamp.now(),
+                name,
+                email,
+                message,
+                sentAt: Timestamp.now(),
             });
-            alert('Message sent successfully!');
             e.target.reset();
-            closePopUp();
-          } catch (error) {
+            setPopUpType('successMessage'); 
+            } catch (error) {
             console.error('Error sending message:', error);
-            alert('Failed to send message. Try again later.');
-          }
+            setPopUpType('errorMessage'); 
+            }
         }}
-      >
+    >
         <input type="text" name="name" placeholder="Your Name" required />
         <input type="email" name="email" placeholder="Your Email" required />
         <textarea name="message" placeholder="Your Message" required></textarea>
@@ -112,6 +111,40 @@ export default function Footer({ show }) {
             </ul>
           </>
         );
+      case 'successMessageNewsletter':
+        return (
+            <div className="popup-message">
+                <h2>Success! </h2>
+                <p>Your email has been subscribed successfully!</p>
+            </div>
+        );
+        case 'errorMessageNewsletter':
+        return (
+            <div className="popup-message">
+                <h2>Error! </h2>
+                <p>There was an error subscribing your email. Please try again later.</p>
+            </div>
+        );
+
+      case 'successMessage':
+        return (
+            <div className="popup-message">
+            <h2>Success ! </h2>
+            <p>Your message has been sent successfully!</p>
+            
+            </div>
+        );
+
+      case 'errorMessage':
+        return (
+            <div className="popup-message">
+            <h2>Error</h2>
+            <p>There was an error sending your message. Please try again later.</p>
+            
+            </div>
+        );
+
+
       default:
         return null;
     }
