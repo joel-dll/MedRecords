@@ -129,8 +129,8 @@ export default function Footer({ show }) {
       case 'successMessage':
         return (
             <div className="popup-message">
-            <h2>Success ! </h2>
-            <p>Your message has been sent successfully!</p>
+            <h2>Success! </h2>
+            <p>Your message has been sent successfully.</p>
             
             </div>
         );

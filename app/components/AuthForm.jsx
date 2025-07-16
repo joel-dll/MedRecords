@@ -24,7 +24,6 @@ export default function AuthForm() {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        
         await setDoc(doc(db, 'users', user.uid), {
           email,
           username,
@@ -41,7 +40,9 @@ export default function AuthForm() {
       console.error('Auth error:', error.code, error.message);
       if (error.code === 'auth/email-already-in-use') {
         alert('Email already registered. Try logging in.');
-        setIsSignUp(false);
+        setIsSignUp(false); // auto switch to login
+      } else if (error.code === 'auth/invalid-login-credentials') {
+        alert('Incorrect email or password.');
       } else {
         alert(error.message);
       }
@@ -53,15 +54,19 @@ export default function AuthForm() {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
-      
-      await setDoc(doc(db, 'users', user.uid), {
-        email: user.email,
-        username: user.displayName || '',
-      }, { merge: true });
+      await setDoc(
+        doc(db, 'users', user.uid),
+        {
+          email: user.email,
+          username: user.displayName || '',
+        },
+        { merge: true }
+      );
 
       alert(`Signed in as ${user.email}`);
       router.push('/dashboard');
     } catch (error) {
+      console.error('Google sign-in error:', error.code, error.message);
       alert('Google sign-in failed: ' + error.message);
     }
   };
@@ -101,7 +106,9 @@ export default function AuthForm() {
 
       {!isSignUp && (
         <div className="form-options">
-          <label><input type="checkbox" /> Remember me</label>
+          <label>
+            <input type="checkbox" /> Remember me
+          </label>
           <a href="#" className="forgot-link">Forgot Password</a>
         </div>
       )}
