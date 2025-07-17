@@ -110,19 +110,22 @@ export default function GreetingCard() {
               placeholder="Full name"
               value={userInfo.name}
               onChange={(e) => setUserInfo({ ...userInfo, name: e.target.value })}
+              style={{ fontSize: '0.8rem'}}
             />
             <input
               placeholder="Age"
               type="number"
               value={userInfo.age}
               onChange={(e) => setUserInfo({ ...userInfo, age: e.target.value })}
+               style={{ fontSize: '0.8rem'}}
             />
             <input
               placeholder="Role (e.g., Wife, Son)"
               value={userInfo.role}
               onChange={(e) => setUserInfo({ ...userInfo, role: e.target.value })}
+               style={{ fontSize: '0.8rem'}}
             />
-            <button onClick={handleSaveInfo}>Save Info</button>
+            <button onClick={handleSaveInfo} style={{ marginTop: '8px', padding: '4px 10px'}}>Save Info</button>
           </div>
         ) : (
           <>
@@ -132,7 +135,7 @@ export default function GreetingCard() {
               {userInfo.age && userInfo.role ? ', ' : ''}
               {userInfo.role}
             </p>
-            <button onClick={() => setEditing(true)} style={{ marginTop: '8px' }}>
+            <button onClick={() => setEditing(true)} style={{ marginTop: '8px', padding: '4px 10px'}} >
               Edit Info
             </button>
           </>
