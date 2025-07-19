@@ -155,15 +155,20 @@ export default function Footer() {
         {footerItems.map(({ label, type }) => (
           <div key={type} className="footer-column">
             <h4 onClick={() => openPopUp(type)}>{label}</h4>
+            
           </div>
+         
         ))}
-      </footer>
 
+          
+      </footer>
+      
       {popUpType && (
         <PopUpFooter onClose={closePopUp}>
           {renderPopUpContent()}
         </PopUpFooter>
       )}
     </>
+    
   );
 }

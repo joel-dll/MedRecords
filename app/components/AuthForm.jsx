@@ -42,7 +42,7 @@ export default function AuthForm() {
 
         await setDoc(doc(db, 'users', user.uid), {
           email,
-          username,
+          name: username,
         });
 
         showPopup('Account created!', 'success', '/dashboard'); 
