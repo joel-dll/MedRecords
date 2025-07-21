@@ -9,6 +9,7 @@ import {
   Timestamp
 } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
+import { deleteDoc, doc } from 'firebase/firestore';
 
 export default function BmiCalculator() {
   const [weight, setWeight] = useState('');
@@ -55,7 +56,13 @@ export default function BmiCalculator() {
     setWeight('');
     setHeight('');
   };
-
+  const deleteBMI = async (entryId, userId) => {
+    try {
+      await deleteDoc(doc(db, `users/${userId}/bmiRecords/${entryId}`));
+    } catch (error) {
+      console.error('Failed to delete BMI record:', error);
+    }
+  };
   return (
     <div className="bmi-card">
       <h3>BMI Tracker</h3>
@@ -80,11 +87,18 @@ export default function BmiCalculator() {
           <li>No records yet</li>
         ) : (
           bmiList
-            .sort((a, b) => b.createdAt?.seconds - a.createdAt?.seconds) 
+            .sort((a, b) => b.createdAt?.seconds - a.createdAt?.seconds)
             .map((entry) => (
-              <li key={entry.id}>
+              <li key={entry.id} className="bmi-item">
                 {entry.bmi} BMI ({entry.weight}kg / {entry.height}cm) —{' '}
                 {entry.createdAt?.toDate().toLocaleDateString()}
+                <button
+                  className="delete-bmi"
+                  onClick={() => deleteBMI(entry.id, userId)}
+                  title="Delete entry"
+                >
+                  ×
+                </button>
               </li>
             ))
         )}

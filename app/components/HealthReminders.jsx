@@ -85,7 +85,7 @@ export default function HealthReminders() {
             <li key={r.id} className="reminder-item">
               <span>{r.text}</span>
               {r.date && <small> {r.date}</small>}
-              <button onClick={() => handleDelete(r.id)}>X</button>
+              <button className="delete-bmi" onClick={() => handleDelete(r.id)}>X</button>
             </li>
           ))}
         </ul>
