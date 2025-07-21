@@ -1,23 +1,28 @@
 'use client';
+
 import { signOut } from 'firebase/auth';
 import { auth } from '../lib/firebase';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export default function DashboardHeader() {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleLogout = async () => {
     await signOut(auth);
     router.push('/');
   };
 
+  const isActive = (path) => pathname === path ? 'active-link' : '';
+
   return (
     <header className="dashboard-header">
       <h1 className="dashboard-logo">MedRecords</h1>
       <nav className="dashboard-nav">
-        <a href="/dashboard">Dashboard</a>
-        <a href="/my-records">My Records</a>
-        <a href="/family">Family</a>
+        <Link href="/dashboard" className={isActive('/dashboard')}>Dashboard</Link>
+        <Link href="/myrecords" className={isActive('/myrecords')}>My Records</Link>
+        <Link href="/family" className={isActive('/family')}>Family</Link>
       </nav>
       <button className="logout-button" onClick={handleLogout}>Log Out</button>
     </header>

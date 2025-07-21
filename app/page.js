@@ -1,30 +1,14 @@
 'use client';
-import './styles/globals.css';
-import AuthForm from './components/AuthForm';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <div className="video-container">
-      
-      <video autoPlay muted loop playsInline className="background-video">
-        <source src="/backgroundVideo.mp4" type="video/mp4" />
-      </video>
+  const router = useRouter();
 
-      
-      <img src="/mask2.png" alt="Overlay Mask" className="video-mask" />
+  useEffect(() => {
+    router.push('/login');
+  }, [router]);
 
-      
-      <div className="left-pane">
-        <div className="branding">
-          <h1 className="logo-title">MedRecords</h1>
-          <p className="subtitle">Your Health, Securely Stored.</p>
-        </div>
-      </div>
-
-     
-      <div className="right-pane">
-        <AuthForm />
-      </div>
-    </div>
-  );
+  return null;
 }
