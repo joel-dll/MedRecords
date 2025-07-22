@@ -69,7 +69,10 @@ html, body {
   z-index: 0; 
   pointer-events: none;
 }
-
+.branding{
+  margin-top: 50%;
+  margin-left: 30%;
+}
 
 .left-pane{
   position: relative;
@@ -295,6 +298,7 @@ html, body {
   font-weight: 100;
   font-family: poppins, sans-serif;
   text-decoration: none;
+  font-size: 1.3rem;
   color: #333;
   padding: 0 1rem;
   transition: all 0.2s ease;
@@ -497,10 +501,11 @@ html, body {
 
 
 .greeting-card {
+ 
   display: flex;
   align-items: center;
   background-color: #bad3cf;
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 10px;
   width: fit-content;
   max-width: 300%;
@@ -508,6 +513,7 @@ html, body {
   gap: 1rem;
   font-family: 'Poppins', sans-serif;
   margin-left: 2%;
+  
 }
 
 .user-image {
@@ -730,6 +736,9 @@ html, body {
   overflow-y: auto;
   max-height: 225px; 
   padding-right: 0.3rem; 
+  font-family: poppins, sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
 }
 .bmi-card {
   background-color: #bad3cf;
@@ -742,7 +751,7 @@ html, body {
   width: 300px;
   max-width: 300px;
   height: 350px;
-  overflow-y: auto;
+  
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -794,6 +803,7 @@ html, body {
   margin-top: 0.5rem;
   font-family: poppins, sans-serif ;
   font-weight: 300;
+  overflow-y: auto;
 }
 
 .bmi-list li {
@@ -802,6 +812,7 @@ html, body {
   padding: 0.4rem;
   border-radius: 5px;
   font-size: 12px;
+  overflow-y: auto;
 }
 
 
@@ -923,3 +934,45 @@ html, body {
 }
 
 
+.weight-chart-container {
+  background-color: #bad3cf;
+  padding: 1rem;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.5rem;
+  width: 945px;
+  height: 98px;
+  display: flex;
+ 
+
+}
+
+.weight-chart-container h3 {
+  font-weight: 300;
+  font-size: 1rem;
+
+ 
+}
+.chart-card {
+  margin-left: 31%;
+  margin-top: -6.7%;
+ 
+  
+}
+.email-button {
+
+  background-color: #4da6a6;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-family: poppins, sans-serif ;
+  font-weight: 300;
+  margin-left: 70%;
+}
+
+.email-button:hover {
+  background-color: #ffffff;
+  color: #85aeae;
+}

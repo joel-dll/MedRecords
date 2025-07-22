@@ -2,8 +2,10 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../lib/firebase'; 
+import { auth, db } from '../lib/firebase'; 
+import { doc, getDoc } from 'firebase/firestore';
 import { getHealthRiskPrediction } from '@/utils/getHealthRiskPrediction';
+import { sendPredictionEmail } from '../../utils/sendPredictionEmail';
 import { SiGooglegemini } from "react-icons/si";
 import { PiRobotThin } from "react-icons/pi";
 
@@ -15,6 +17,7 @@ export default function PredictiveHealthRiskAssessment() {
   const [prediction, setPrediction] = useState('');
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [emailSent, setEmailSent] = useState(false);
 
   const predictionRef = useRef(null);
 
@@ -37,12 +40,13 @@ export default function PredictiveHealthRiskAssessment() {
 
   const handleSubmit = async () => {
     if (!userId) {
-      setPrediction('⚠️ Please sign in to get predictions.');
+      setPrediction('Please sign in to get predictions.');
       return;
     }
 
     setLoading(true);
     setPrediction('');
+    setEmailSent(false); 
 
     try {
       const result = await getHealthRiskPrediction({
@@ -59,6 +63,28 @@ export default function PredictiveHealthRiskAssessment() {
     }
 
     setLoading(false);
+  };
+
+  const handleSendEmail = async () => {
+    try {
+      const userDoc = await getDoc(doc(db, 'users', userId));
+      const data = userDoc.exists() ? userDoc.data() : null;
+
+      const email = data?.email;
+      const name = data?.name || 'User';
+
+      const sent = await sendPredictionEmail(email, name, prediction);
+
+      if (sent) {
+        alert('Prediction sent to your email!');
+        setEmailSent(true);
+      } else {
+        alert('Failed to send email.');
+      }
+    } catch (error) {
+      console.error('Email send error:', error);
+      alert('Error sending email.');
+    }
   };
 
   return (
@@ -109,6 +135,12 @@ export default function PredictiveHealthRiskAssessment() {
         <div className="predict-result" ref={predictionRef}>
           <strong>AI Prediction:</strong>
           <p>{prediction}</p>
+
+          {!emailSent && (
+            <button onClick={handleSendEmail} className="email-button" style={{ marginTop: '1rem' }}>
+              Send to My Email
+            </button>
+          )}
         </div>
       )}
     </div>
