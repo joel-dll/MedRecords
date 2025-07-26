@@ -275,40 +275,61 @@ html, body {
 }
 
 
-
 .dashboard-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start; 
-  padding: 2rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+  background: #f5f7f6;
 }
 
 .dashboard-logo {
-  font-size: 3rem;
-  color: #333;
-  font-family: poppins, sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 200;
-}
-.dashboard-nav {
-  margin-top: 80px; 
+  font-size: 2rem;
 }
 
+/* Hamburger icon hidden on desktop */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Nav styles */
+.dashboard-nav {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0;
+}
 
 .dashboard-nav a {
   font-weight: 100;
-  font-family: poppins, sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-decoration: none;
   font-size: 1.3rem;
   color: #333;
-  padding: 0 1rem;
   transition: all 0.2s ease;
 }
 
 .dashboard-nav a.active-link {
   font-weight: 500;
-  color: #2ca7a0; 
-  font-family: poppins, sans-serif;
+  color: #2ca7a0;
 }
+
+.logout-button {
+  background: none;
+  border: 1px solid #aaa;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+}
+
+
 
 
 .logout-button {
@@ -361,16 +382,18 @@ html, body {
   list-style: none;
   margin: 0.25rem 0;
 }
-
 .dashboard-footer {
   background-color: #98bbb6;
   color: rgb(44, 41, 41);
   display: flex;
-  justify-content: space-around;
-  padding: 0.7rem 30rem;
-  font-family: poppins, sans-serif;
+  justify-content: center;      
+  align-items: center;           
+  gap: 2rem;                     
+  flex-wrap: wrap;
+  padding: 1rem 2rem;
+  font-family: 'Poppins', sans-serif;
   font-weight: 100;
-  font-size: 0.50rem;
+  font-size: 0.7rem;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -382,8 +405,11 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.1rem;
+  margin: 0.5rem 1rem;
+  min-width: 100px;
 }
+
+
 
 .footer-column h4 {
   display: inline;
@@ -513,6 +539,7 @@ html, body {
   gap: 1rem;
   font-family: 'Poppins', sans-serif;
   margin-left: 2%;
+  margin-top: 2%;
   
 }
 
@@ -633,7 +660,7 @@ html, body {
   border-left: 6px solid #F44336;
 }
 
-.popup-ok-button {
+.popup-ok-button, .popup-cancel-button {
   margin-top: 1.5rem;
   padding: 0.6rem 1.5rem;
   background-color:  #4da6a6;
@@ -646,7 +673,7 @@ html, body {
   transition: background-color 0.3s ease;
 }
 
-.popup-ok-button:hover {
+.popup-ok-button:hover, .popup-cancel-button:hover {
   background-color:  #72bbbb;
 }
 
@@ -985,8 +1012,8 @@ html, body {
   padding: 2rem;
   margin-top: 1rem;
 
-  /* ✅ Add scroll height */
-  max-height: 32vh; /* adjust as needed */
+  
+  max-height: 32vh; 
   overflow-y:scroll;
   
 }
@@ -1001,15 +1028,21 @@ html, body {
   border: none;
   outline: none;
   box-shadow: none;
-  background-color: transparent;
+  padding: 0.3rem;
+  
   
 }
 .delete-button {
   color: rgb(189, 8, 8);
   font-size: 1.3rem;
-  background-color: transparent;
+  background-color:transparent;
   border: none;
+  outline: none;
+  padding: 0.3rem;
+  cursor: pointer;
+ 
 }
+
 
 .record-card {
   background-color: #cad2d0;
@@ -1141,3 +1174,47 @@ html, body {
   background-color: #ffffff;
   cursor: pointer;
 }
+
+
+
+
+@media (max-width: 768px) {
+  .dashboard-footer {
+    flex-direction: column;
+    align-items: center;
+    padding: 0rem;
+    font-size: 0.75rem;
+  }
+
+  .footer-column {
+    align-items: center;
+    margin: 0 0;
+  }
+
+  .footer-column h4 {
+    font-size: 0.75rem;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .dashboard-nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1rem 0;
+    background: #f5f7f6;
+  }
+
+  .dashboard-nav.open {
+    display: flex;
+  }
+
+  .dashboard-nav a {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+  }
+}
+

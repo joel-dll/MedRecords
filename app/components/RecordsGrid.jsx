@@ -26,15 +26,17 @@ export default function RecordGrid() {
   onConfirm: null,
   input: false,
   onInputSubmit: null,
+  showCancel: false,
 });
   const showPopup = (
   message,
   type = 'info',
   onConfirm = null,
   input = false,
-  onInputSubmit = null
+  onInputSubmit = null,
+  showCancel = false
 ) => {
-  setPopup({ visible: true, message, type, onConfirm, input, onInputSubmit });
+  setPopup({ visible: true, message, type, onConfirm, input, onInputSubmit, showCancel });
 };
   const closePopup = () => {
   setPopup({
@@ -100,12 +102,13 @@ export default function RecordGrid() {
     }
   };
 
-  const handleDelete = async (record) => {
-    if (!currentUser) {
-      showPopup('Please log in to delete files.');
-      return;
-    }
-    showPopup(
+  const handleDelete = (record) => {
+  if (!currentUser) {
+    showPopup('Please log in to delete files.', 'error');
+    return;
+  }
+
+  showPopup(
     `Are you sure you want to delete "${record.name}"?`,
     'warning',
     async () => {
@@ -117,7 +120,10 @@ export default function RecordGrid() {
         console.error('Error deleting record:', err);
         showPopup('Failed to delete file.', 'error');
       }
-    }
+    },
+    false, 
+    null,  
+    true   
   );
 };
 
@@ -213,33 +219,33 @@ export default function RecordGrid() {
             <p className="record-detail">{record.category || record.fileType}</p>
             <p className="record-detail">{record.country}</p>
             <div className="record-actions">
-              <a href={record.fileURL} target="_blank" rel="noopener noreferrer" title="View">
-                <IoEyeOutline className="records-icon" />
+              <a className="records-icon" href={record.fileURL} target="_blank" rel="noopener noreferrer" title="View">
+                <IoEyeOutline  />
               </a>
-              <button title="Share" onClick={() => handleShare(record)}>
-                <IoShareOutline className="records-icon" />
+              <button className="records-icon" title="Share" onClick={() => handleShare(record)}>
+                <IoShareOutline  />
               </button>
-              <button title="AI Translate">
-                <AiOutlineRobot className="records-icon" />
+              <button className="records-icon" title="AI Translate">
+                <AiOutlineRobot  />
               </button>
-              <button title="Delete" onClick={() => handleDelete(record)}>
-                <AiFillDelete className="records-icon" />
+              <button  className="delete-button" title="Delete" onClick={() => handleDelete(record)}>
+                <AiFillDelete />
               </button>
             </div>
           </div>
         ))}
        </div>
 
-      {popup.visible && (
-  <PopUpMessage
+      
+  {popup.visible && (
+    <PopUpMessage
         message={popup.message}
         type={popup.type}
         input={popup.input}
-        onClose={() => {
-        if (!popup.input) {
-            if (popup.onConfirm) popup.onConfirm();
-            closePopup();
-        }
+        showCancel={popup.showCancel}
+        onClose={(confirmed) => {
+        if (confirmed && popup.onConfirm) popup.onConfirm();
+        closePopup();
         }}
         onInputSubmit={(value) => {
         if (popup.onInputSubmit) popup.onInputSubmit(value);

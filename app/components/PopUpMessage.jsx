@@ -8,6 +8,7 @@ export default function PopUpMessage({
   onClose,
   input = false,
   onInputSubmit = null,
+  showCancel = false,
 }) {
   const [inputValue, setInputValue] = useState('');
 
@@ -15,7 +16,11 @@ export default function PopUpMessage({
     if (input && onInputSubmit) {
       onInputSubmit(inputValue);
     }
-    onClose();
+    onClose(true); // confirmed
+  };
+
+  const handleCancel = () => {
+    onClose(false); // cancelled
   };
 
   return (
@@ -23,7 +28,7 @@ export default function PopUpMessage({
       <div className={`popup-message2 ${type}`}>
         <p>{message}</p>
 
-        {input ? (
+        {input && (
           <input
             type="email"
             placeholder="e.g. doctor@example.com"
@@ -31,11 +36,18 @@ export default function PopUpMessage({
             onChange={(e) => setInputValue(e.target.value)}
             className="popup-input"
           />
-        ) : null}
+        )}
 
-        <button className="popup-ok-button" onClick={handleOK}>
-          OK
-        </button>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+          {showCancel && (
+            <button className="popup-cancel-button" onClick={handleCancel}>
+              Cancel
+            </button>
+          )}
+          <button className="popup-ok-button" onClick={handleOK}>
+            OK
+          </button>
+        </div>
       </div>
     </div>
   );
