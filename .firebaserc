@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "medrecords-e9eed",
+    "MedRecords": "medrecords-e9eed"
+  },
+  "targets": {},
+  "etags": {}
+}

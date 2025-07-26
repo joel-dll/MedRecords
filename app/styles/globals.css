@@ -976,3 +976,168 @@ html, body {
   background-color: #ffffff;
   color: #85aeae;
 }
+
+
+.record-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  margin-top: 1rem;
+
+  /* ✅ Add scroll height */
+  max-height: 32vh; /* adjust as needed */
+  overflow-y:scroll;
+  
+}
+
+
+.records-icon {
+  font-size: 1.3rem;
+  color: #393434;
+  cursor: pointer;
+  transition: color 0.2s;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+  
+}
+.delete-button {
+  color: rgb(189, 8, 8);
+  font-size: 1.3rem;
+  background-color: transparent;
+  border: none;
+}
+
+.record-card {
+  background-color: #cad2d0;
+  border-radius: 12px;
+  padding: 1.2rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 170px;
+  width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.record-card:hover {
+  transform: translateY(-4px);
+}
+
+.record-card h4 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+  font-family: poppins, sans-serif;
+  font-weight: 300;
+}
+
+.record-detail {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  font-family: poppins, sans-serif;
+  font-weight: 200;
+}
+
+.upload-form {
+  font-family: poppins, sans-serif;
+  font-weight: 200;
+  padding: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-start;
+
+}
+
+.upload-form input {
+  font-family: poppins, sans-serif;
+  font-weight: 200;
+  flex: 1 1 auto;
+  width: 10px;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+
+}
+.popup-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  font-family: 'Poppins', sans-serif;
+}
+.upload-form select {
+  font-family: poppins, sans-serif;
+  font-weight: 300;
+  flex: 1 1 auto;
+  width: 0.2rem;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #5c9d9b;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.upload-form button {
+
+  width:130px;
+  height: 35px;
+  background-color: #4da6a6;
+  font-size: 0.8rem;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-family: poppins, sans-serif ;
+  font-weight: 300;
+ 
+  
+}
+
+.upload-form button:hover {
+  background-color: #417b78;
+}
+
+
+
+.filter-bar {
+  display: flex;
+  font-size: 0.8rem;
+  align-items: center;
+  font-family: poppins, sans-serif;
+  font-weight: 200;
+  margin-left: 2.5%;
+  margin-top: -2rem;
+  gap: 0.6rem;
+  margin-bottom: 0rem;
+  padding: 0px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.filter-bar select {
+  font-size: 0.7rem;
+  font-family: poppins, sans-serif;
+  font-weight: 200;
+  padding: 0.4rem 0.3rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  cursor: pointer;
+}
