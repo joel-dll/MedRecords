@@ -25,7 +25,7 @@ export default function WeightChart() {
       const entries = snapshot.docs.map(doc => {
         const { weight, createdAt } = doc.data();
 
-        // ✅ Handle missing or malformed timestamps
+        
         const date = createdAt?.toDate?.();
         return {
           date: date ? date.toLocaleDateString('en-GB') : 'Invalid',
@@ -33,18 +33,18 @@ export default function WeightChart() {
         };
       });
 
-      // Sort by date
+     
       entries.sort((a, b) => new Date(a.date) - new Date(b.date));
       setData(entries);
     });
 
     return () => unsubscribe();
   }, []);
-
   return (
     <div className="weight-chart-container">
       <h3>Weight Over Time</h3>
-      <ResponsiveContainer className="chart" >
+      <ResponsiveContainer  height={99} className="chart">
+
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
@@ -56,3 +56,5 @@ export default function WeightChart() {
     </div>
   );
 }
+
+

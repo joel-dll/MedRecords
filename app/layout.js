@@ -1,6 +1,7 @@
+
 import './styles/globals.css';
 import { Poppins } from 'next/font/google';
-import LayoutWrapper from './components/LayoutWrapper';
+import LayoutWrapper from '../app/components/LayoutWrapper'; 
 
 const poppins = Poppins({
   weight: ['100', '300', '400', '600'],
@@ -14,7 +15,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={poppins.className}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>

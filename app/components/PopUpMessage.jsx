@@ -16,11 +16,11 @@ export default function PopUpMessage({
     if (input && onInputSubmit) {
       onInputSubmit(inputValue);
     }
-    onClose(true); // confirmed
+    onClose(true);
   };
 
   const handleCancel = () => {
-    onClose(false); // cancelled
+    onClose(false); 
   };
 
   return (
@@ -52,3 +52,6 @@ export default function PopUpMessage({
     </div>
   );
 }
+
+
+

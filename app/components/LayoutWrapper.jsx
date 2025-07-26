@@ -1,11 +1,12 @@
-'use client';
-import { usePathname } from 'next/navigation';
-import DashboardHeader from './Header';
-import GreetingCard from './GreetingCard';
-import Footer from './Footer';
-import '../styles/globals.css';
 
-export default function LayoutWrapper({ children }) {
+'use client';
+
+import { usePathname } from 'next/navigation';
+import DashboardHeader from '../components/Header';
+import GreetingCard from '../components/GreetingCard';
+import Footer from '../components/Footer';
+
+export default function LayoutShell({ children }) {
   const pathname = usePathname();
   const isLoginPage = pathname === '/login';
 

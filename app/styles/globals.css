@@ -414,7 +414,7 @@ html, body {
 .footer-column h4 {
   display: inline;
   font-weight: 400;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -960,32 +960,30 @@ html, body {
   align-items: stretch; 
 }
 
-
 .weight-chart-container {
   background-color: #bad3cf;
   padding: 1rem;
   border-radius: 12px;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.5rem;
-  width: 945px;
-  height: 98px;
+  font-size: 0.8rem;
+  width: 900px;
+  height: 150px;
+  margin: 0 auto;
+  box-sizing: border-box;
   display: flex;
- 
-
+  flex-direction: column;
 }
 
 .weight-chart-container h3 {
   font-weight: 300;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
 
- 
-}
-.chart-card {
-  margin-left: 31%;
-  margin-top: -6.7%;
- 
-  
-}
+
+
 .email-button {
 
   background-color: #4da6a6;
@@ -1216,5 +1214,23 @@ html, body {
     padding: 0.5rem 1rem;
     font-size: 1.2rem;
   }
+
 }
 
+@media (max-width: 600px) {
+  .weight-chart-container {
+    padding: 0.5rem;
+    font-size: 0.7rem;
+    height: auto; 
+    width: auto;
+    margin-top: 3%;
+  }
+
+  .weight-chart-container h3 {
+    font-size: 1rem;
+  }
+
+  .chart {
+    height: 100px !important; 
+  }
+}
