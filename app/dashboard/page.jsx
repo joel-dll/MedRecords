@@ -9,14 +9,10 @@ export default function Dashboard() {
     <div className="chart-card"><WeightChart /></div>
       
       <div className="reminder-bmi-row">
-        <div className="card-section"><HealthReminders /></div>
-        <div className="card-section"><BmiCalculator /></div>
-        <div className="card-section"><PredictiveHealthRiskAssessment /></div>
-        
+        <div className="reminders-card"><HealthReminders /></div>
+        <div className="bmi-card"><BmiCalculator /></div>
+        <div className="predict-card"><PredictiveHealthRiskAssessment /></div>
       </div>
-     
-      
-      
     </div>
   );
 }

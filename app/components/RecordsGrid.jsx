@@ -3,7 +3,8 @@
 
 import { useEffect, useState } from 'react';
 import { db, auth } from '../lib/firebase';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
+import { useRouter } from 'next/navigation';
 import { onAuthStateChanged } from 'firebase/auth';
 import { AiFillDelete } from 'react-icons/ai';
 import { IoShareOutline, IoEyeOutline } from 'react-icons/io5';
@@ -14,6 +15,8 @@ import FamilyPage from '../family/page';
 import PopUpMessage from './PopUpMessage';
 
 export default function RecordGrid() {
+    const router = useRouter();
+
   const [records, setRecords] = useState([]);
   const [filterCategory, setFilterCategory] = useState('All');
   const [loadingRecords, setLoadingRecords] = useState(true);
@@ -48,6 +51,10 @@ export default function RecordGrid() {
     onInputSubmit: null,
   });
 };
+
+ const handleClick = () => {
+    router.push('/ai_page'); 
+  };
   
   
 
@@ -67,29 +74,27 @@ export default function RecordGrid() {
   }, []);
 
   useEffect(() => {
-    const fetchRecords = async () => {
-      if (!isAuthReady || !currentUser) {
-        setLoadingRecords(false);
-        return;
-      }
+  if (!isAuthReady || !currentUser) {
+    setLoadingRecords(false);
+    return;
+  }
 
-      setLoadingRecords(true);
-      try {
-        const recordsRef = collection(db, 'users', currentUser.uid, 'records');
-        const snapshot = await getDocs(recordsRef);
-        const fetchedDocs = snapshot.docs
-          .map(doc => ({ id: doc.id, ...doc.data() }))
-          .filter(record => record.fileURL);
-        setRecords(fetchedDocs);
-      } catch (error) {
-        console.error('Error fetching records:', error);
-      } finally {
-        setLoadingRecords(false);
-      }
-    };
+  const recordsRef = collection(db, 'users', currentUser.uid, 'records');
 
-    fetchRecords();
-  }, [currentUser, isAuthReady]);
+  const unsubscribe = onSnapshot(recordsRef, (snapshot) => {
+    const fetchedDocs = snapshot.docs
+      .map(doc => ({ id: doc.id, ...doc.data() }))
+      .filter(record => record.fileURL);
+    setRecords(fetchedDocs);
+    setLoadingRecords(false);
+  }, (error) => {
+    console.error('Error fetching records:', error);
+    setLoadingRecords(false);
+  });
+
+  return () => unsubscribe();
+}, [currentUser, isAuthReady]);
+
 
   const getPathFromURL = (url) => {
     try {
@@ -225,8 +230,8 @@ export default function RecordGrid() {
               <button className="records-icon" title="Share" onClick={() => handleShare(record)}>
                 <IoShareOutline  />
               </button>
-              <button className="records-icon" title="AI Translate">
-                <AiOutlineRobot  />
+               <button className="records-icon" title="AI Translate" onClick={handleClick}>
+                <AiOutlineRobot />
               </button>
               <button  className="delete-button" title="Delete" onClick={() => handleDelete(record)}>
                 <AiFillDelete />

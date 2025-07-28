@@ -290,7 +290,7 @@ html, body {
   font-size: 2rem;
 }
 
-/* Hamburger icon hidden on desktop */
+
 .hamburger {
   display: none;
   font-size: 2rem;
@@ -299,7 +299,7 @@ html, body {
   cursor: pointer;
 }
 
-/* Nav styles */
+
 .dashboard-nav {
   display: flex;
   gap: 1rem;
@@ -396,6 +396,7 @@ html, body {
   font-size: 0.7rem;
   position: fixed;
   bottom: 0;
+  height: 5%;
   width: 100%;
   z-index: 10;
   transition: transform 0.3s ease;
@@ -405,7 +406,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 0.5rem 1rem;
+  margin: -1rem 1rem;
   min-width: 100px;
 }
 
@@ -688,22 +689,7 @@ html, body {
   }
 }
 
-.reminders-card {
-  background-color: #bad3cf;
-  border-radius: 12px;
-  margin-top: 10%;
-  margin-left: 14%;
-  padding: 1rem;
-  font-size: 1rem;
-  font-weight: 100;
-  width: 400px;
-  max-width: 400px;
-  height: 350px;
-  min-height: 350px;  
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
+
 .reminders-card h3 {
   font-weight: 300 ;
   font-family: 'Poppins', sans-serif;
@@ -767,23 +753,7 @@ html, body {
   font-weight: 300;
   font-size: 0.9rem;
 }
-.bmi-card {
-  background-color: #bad3cf;
-  margin-top: 10%;
-  margin-left: 10%;
-  border-radius: 12px;
-  padding: 1rem;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
-  width: 300px;
-  max-width: 300px;
-  height: 350px;
-  
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  flex: 1;
-}
+
 
 .bmi-card h3 {
   font-weight: 300;
@@ -846,22 +816,6 @@ html, body {
 
 
 
-.predict-card {
-  background-color: #bad3cf;
-  margin-top: 7%;
-  margin-left: -9%;
-  border-radius: 12px;
-  padding: 1rem;
-  font-size: 1rem;
-  width: 600px;
-  max-width: 600px;
-  height: 350px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  
-}
 .predict-card h3 {
   font-family: poppins, sans-serif ;
   font-weight: 300;
@@ -878,7 +832,7 @@ html, body {
 .predict-form textarea,
 .predict-form input {
   display: block;
-  width: 100%;
+  width: 400px;
   margin-bottom: 1rem;
   padding: 0.3rem;
   border-radius: 0.5rem;
@@ -886,6 +840,7 @@ html, body {
   resize: vertical;
   font-family: poppins, sans-serif ;
   font-weight: 200;
+  height: 50px;
   
 }
 
@@ -951,14 +906,60 @@ html, body {
   display: flex;
 }
 
-
 .reminder-bmi-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0rem;
   justify-content: center;
-  align-items: stretch; 
+  align-items: flex-start;
+  gap: 1rem; 
+  padding: 2rem 1rem;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: auto;
+  
+  
 }
+
+.reminders-card,
+.bmi-card,
+.predict-card {
+  
+  border-radius: 12px;
+  padding: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  height: 327px;
+  box-sizing: border-box;
+  background-color: #bad3cf;
+  flex: 1 1 200px; 
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+
+.reminders-card {
+  
+  overflow-y: auto;
+  flex: 0 0 400px;
+  
+}
+
+.bmi-card {
+ 
+  flex: 0 0 320px; 
+  overflow-y: auto;
+  
+}
+
+.predict-card {
+  
+  overflow-y: auto;
+  flex: 0 0 600px;
+  
+}
+
 
 .weight-chart-container {
   background-color: #bad3cf;
@@ -967,16 +968,23 @@ html, body {
   font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   width: 900px;
-  height: 150px;
+  height: 103px;
   margin: 0 auto;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
-
+.chart-card{
+  margin-top: 1%;
+}
+.chart{
+  margin-top: -5%;
+  margin-bottom: 90%;
+}
 .weight-chart-container h3 {
+
   font-weight: 300;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   margin-bottom: 1rem;
   text-align: center;
   font-family: 'Poppins', sans-serif;
@@ -1182,11 +1190,13 @@ html, body {
     align-items: center;
     padding: 0rem;
     font-size: 0.75rem;
+    height: 75px;
   }
 
   .footer-column {
     align-items: center;
-    margin: 0 0;
+    margin: 1 0;
+    
   }
 
   .footer-column h4 {
@@ -1204,6 +1214,7 @@ html, body {
     margin-top: 1rem;
     padding: 1rem 0;
     background: #f5f7f6;
+    
   }
 
   .dashboard-nav.open {
@@ -1221,8 +1232,8 @@ html, body {
   .weight-chart-container {
     padding: 0.5rem;
     font-size: 0.7rem;
-    height: auto; 
-    width: auto;
+    height: 120px; 
+    width: 370px;
     margin-top: 3%;
   }
 
@@ -1232,5 +1243,34 @@ html, body {
 
   .chart {
     height: 100px !important; 
+  }
+}
+  
+
+@media (max-width: 768px) {
+  .reminder-bmi-row {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+   gap: 1.5rem;
+   padding: 2rem;
+   margin-top: -4rem;
+   height: 58vh; 
+   overflow-y:scroll;
+  }
+
+  .reminders-card,
+  .bmi-card,
+  .predict-card {
+    height: 250px;     
+    flex: none;
+    width: 100%;
+    max-width: 450px;
+    overflow-y: auto;   
+  }
+
+  .chart-card {
+    height: 200px;
+    width: 100%;
+    max-width: 450px;
   }
 }
