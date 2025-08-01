@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { db, storage, auth } from '../lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
@@ -20,11 +20,20 @@ export default function FileUpload({ onUploadSuccess }) {
   const fileInputRef = useRef(null);
 
   
-  onAuthStateChanged(auth, (user) => {
-    if (user && !currentUser) {
+  useEffect(() => {
+  let isMounted = true;
+
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user && isMounted) {
       setCurrentUser(user);
     }
   });
+
+  return () => {
+    isMounted = false;
+    unsubscribe(); 
+  };
+}, []);
 
   const showPopup = (message, type = 'info') => {
     setPopup({ visible: true, message, type });

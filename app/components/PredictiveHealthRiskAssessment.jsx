@@ -8,6 +8,7 @@ import { getHealthRiskPrediction } from '@/utils/getHealthRiskPrediction';
 import { sendPredictionEmail } from '../../utils/sendPredictionEmail';
 import { SiGooglegemini } from "react-icons/si";
 import { PiRobotThin } from "react-icons/pi";
+import PopUpMessage from '../components/PopUpMessage';
 
 export default function PredictiveHealthRiskAssessment() {
   const [medicalHistory, setMedicalHistory] = useState('');
@@ -18,6 +19,10 @@ export default function PredictiveHealthRiskAssessment() {
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState(null);
   const [emailSent, setEmailSent] = useState(false);
+
+  const [popupMsg, setPopupMsg] = useState('');
+  const [popupType, setPopupType] = useState('success');
+  const [showPopup, setShowPopup] = useState(false);
 
   const predictionRef = useRef(null);
 
@@ -76,14 +81,20 @@ export default function PredictiveHealthRiskAssessment() {
       const sent = await sendPredictionEmail(email, name, prediction);
 
       if (sent) {
-        alert('Prediction sent to your email!');
         setEmailSent(true);
+        setPopupMsg('Prediction sent to your email!');
+        setPopupType('success');
+        setShowPopup(true);
       } else {
-        alert('Failed to send email.');
+        setPopupMsg('Failed to send email.');
+        setPopupType('error');
+        setShowPopup(true);
       }
     } catch (error) {
       console.error('Email send error:', error);
-      alert('Error sending email.');
+      setPopupMsg('Error sending email.');
+      setPopupType('error');
+      setShowPopup(true);
     }
   };
 
@@ -142,6 +153,14 @@ export default function PredictiveHealthRiskAssessment() {
             </button>
           )}
         </div>
+      )}
+
+      {showPopup && (
+        <PopUpMessage
+          message={popupMsg}
+          onClose={() => setShowPopup(false)}
+          type={popupType}
+        />
       )}
     </div>
   );
