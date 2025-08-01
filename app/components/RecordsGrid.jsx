@@ -15,8 +15,8 @@ import FamilyPage from '../family/page';
 import PopUpMessage from './PopUpMessage';
 
 export default function RecordGrid() {
-    const router = useRouter();
-
+  
+  const router = useRouter();
   const [records, setRecords] = useState([]);
   const [filterCategory, setFilterCategory] = useState('All');
   const [loadingRecords, setLoadingRecords] = useState(true);
@@ -52,9 +52,10 @@ export default function RecordGrid() {
   });
 };
 
- const handleClick = () => {
-    router.push('/ai_page'); 
-  };
+  const handleAIClick = (record) => {
+    const encodedPath = encodeURIComponent(record.storagePath); 
+    router.push(`/ai_page?filePath=${encodedPath}`);
+};
   
   
 
@@ -230,7 +231,7 @@ export default function RecordGrid() {
               <button className="records-icon" title="Share" onClick={() => handleShare(record)}>
                 <IoShareOutline  />
               </button>
-               <button className="records-icon" title="AI Translate" onClick={handleClick}>
+               <button className="records-icon" title="AI" onClick={() => handleAIClick(record)}>
                 <AiOutlineRobot />
               </button>
               <button  className="delete-button" title="Delete" onClick={() => handleDelete(record)}>
