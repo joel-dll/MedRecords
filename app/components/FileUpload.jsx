@@ -91,7 +91,7 @@ export default function FileUpload({ onUploadSuccess }) {
 
   return (
     <div>
-      <form onSubmit={(e) => e.preventDefault()} className="upload-form">
+      <form onSubmit={(e) => e.preventDefault()} className="upload-form-2">
         <input
           type="file"
           ref={fileInputRef}

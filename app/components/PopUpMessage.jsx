@@ -9,6 +9,7 @@ export default function PopUpMessage({
   input = false,
   onInputSubmit = null,
   showCancel = false,
+  onConfirm = null, 
 }) {
   const [inputValue, setInputValue] = useState('');
 
@@ -16,11 +17,16 @@ export default function PopUpMessage({
     if (input && onInputSubmit) {
       onInputSubmit(inputValue);
     }
+
+    if (onConfirm) {
+      onConfirm(); 
+    }
+
     onClose(true);
   };
 
   const handleCancel = () => {
-    onClose(false); 
+    onClose(false);
   };
 
   return (
@@ -52,6 +58,3 @@ export default function PopUpMessage({
     </div>
   );
 }
-
-
-

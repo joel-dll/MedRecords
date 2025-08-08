@@ -11,7 +11,7 @@ import { IoShareOutline, IoEyeOutline } from 'react-icons/io5';
 import { AiOutlineRobot } from 'react-icons/ai';
 import { createSecureShareToken } from '../../utils/shareSecureFile';
 import emailjs from '@emailjs/browser';
-import FamilyPage from '../family/page';
+
 import PopUpMessage from './PopUpMessage';
 
 export default function RecordGrid() {

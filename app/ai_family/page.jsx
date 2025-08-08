@@ -8,7 +8,7 @@ import emailjs from 'emailjs-com';
 import PopUpMessage from '../components/PopUpMessage';
 import { PiRobotThin } from 'react-icons/pi';
 
-export default function AIPage() {
+export default function FamilyAIPage() {
   const [fileUrl, setFileUrl] = useState('');
   const [fileType, setFileType] = useState('');
   const [userPrompt, setUserPrompt] = useState('');
@@ -59,7 +59,7 @@ export default function AIPage() {
       setPopupType('success');
       setPopupMsg('AI summary generated!');
     } catch (err) {
-      console.error('Frontend AI error:', err);
+      console.error('AI summary error:', err);
       setAiResult('An error occurred while processing the document.');
       setShowPopup(true);
       setPopupType('error');
@@ -91,7 +91,7 @@ export default function AIPage() {
         templateParams,
         'OhcGaiZTHJFqEZ5xw'
       );
-      setPopupMsg('Ai Assistant reponse sent!');
+      setPopupMsg('AI Assistant response sent!');
       setPopupType('success');
       setShowPopup(true);
     } catch (error) {
@@ -118,7 +118,7 @@ export default function AIPage() {
         </div>
 
         <div className="ai-panel">
-          <h3> AI Assistant <PiRobotThin className="robot-icon-aipage" /></h3>
+          <h3> Ai Assistant  <PiRobotThin className="robot-icon-aipage" /></h3>
           <textarea
             placeholder="Ask something like 'Translate to Spanish and summarize...'"
             value={userPrompt}
@@ -137,11 +137,11 @@ export default function AIPage() {
                 <button className="button-ai-share" onClick={handleShare}>
                   Share
                 </button>
-                 <button
+                <button
                 className="button-ai-copy"
                 onClick={() => {
                     navigator.clipboard.writeText(aiResult);
-                    setPopupMsg('Text copied!');
+                    setPopupMsg('Text copied to clipboard!');
                     setPopupType('success');
                     setShowPopup(true);
                 }}
