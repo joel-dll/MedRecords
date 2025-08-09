@@ -70,9 +70,26 @@ export default function FamilyPage() {
           <div className="family-right">
             <span className="status">Active</span>
             <div className="actions">
-              <button onClick={() => router.push(`/family/${member.id}`)}>View</button>
-              <button onClick={() => router.push(`/family/edit/${member.id}`)}>Edit</button>
-              <button onClick={() => handleDelete(member.id)}>Remove</button>
+              <button
+                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: "300" }}
+                onClick={() => router.push(`/family/${member.id}`)}
+              >
+                View
+              </button>
+
+              <button
+                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: "300" }}
+                onClick={() => router.push(`/family/edit/${member.id}`)}
+              >
+                Edit
+              </button>
+
+              <button
+                style={{ fontFamily: 'Poppins, sans-serif', fontWeight: "300" }}
+                onClick={() => handleDelete(member.id)}
+              >
+                Remove
+              </button>
             </div>
           </div>
         </div>

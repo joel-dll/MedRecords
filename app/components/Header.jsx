@@ -32,9 +32,11 @@ export default function DashboardHeader() {
 
       <nav className={`dashboard-nav ${menuOpen ? 'open' : ''}`}>
 
+        
         <Link href="/dashboard" className={isActive('/dashboard')}>Dashboard</Link>
         <Link href="/myrecords" className={isActive('/myrecords')}>My Records</Link>
         <Link href="/family" className={isActive('/family')}>Family</Link>
+        <Link href="/settings" className={isActive('/settings')}>Settings</Link>
       </nav>
 
       <button className="logout-button" onClick={handleLogout}>Log Out</button>

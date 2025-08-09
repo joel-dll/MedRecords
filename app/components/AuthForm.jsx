@@ -6,18 +6,22 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import PopUpMessage from '../components/PopUpMessage';
 
 export default function AuthForm() {
   const router = useRouter();
+
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [popup, setPopup] = useState({ show: false, message: '', type: '' });
-  const [pendingRedirect, setPendingRedirect] = useState(null); 
+  const [pendingRedirect, setPendingRedirect] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [sendingReset, setSendingReset] = useState(false);
 
   const showPopup = (message, type = 'success', redirectPath = null) => {
     setPopup({ show: true, message, type });
@@ -34,37 +38,47 @@ export default function AuthForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email || !password || (isSignUp && !username)) return;
 
     try {
+      setSubmitting(true);
+
       if (isSignUp) {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
+        
         await setDoc(doc(db, 'users', user.uid), {
           email,
           name: username,
-        });
+          createdAt: new Date(),
+        }, { merge: true });
 
-        showPopup('Account created!', 'success', '/dashboard'); 
+        showPopup('Account created! Redirecting…', 'success', '/dashboard');
       } else {
         await signInWithEmailAndPassword(auth, email, password);
-        showPopup('You’ve successfully signed in.', 'success', '/dashboard'); 
+        showPopup('You’ve successfully signed in.', 'success', '/dashboard');
       }
     } catch (error) {
       console.error('Auth error:', error.code, error.message);
       if (error.code === 'auth/email-already-in-use') {
         showPopup('Email already registered. Try logging in.', 'error');
         setIsSignUp(false);
-      } else if (error.code === 'auth/invalid-login-credentials') {
+      } else if (error.code === 'auth/invalid-login-credentials' || error.code === 'auth/wrong-password') {
         showPopup('Incorrect email or password.', 'error');
+      } else if (error.code === 'auth/too-many-requests') {
+        showPopup('Too many attempts. Please try again later.', 'error');
       } else {
-        showPopup(error.message, 'error');
+        showPopup(error.message || 'Authentication failed', 'error');
       }
+    } finally {
+      setSubmitting(false);
     }
   };
 
   const handleGoogleSignIn = async () => {
     try {
+      setSubmitting(true);
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
@@ -72,15 +86,53 @@ export default function AuthForm() {
         doc(db, 'users', user.uid),
         {
           email: user.email,
-          username: user.displayName || '',
+          name: user.displayName || '',
+          lastLoginAt: new Date(),
         },
         { merge: true }
       );
 
-      showPopup(`Signed in as ${user.email}`, 'success', '/dashboard'); 
+      showPopup(`Signed in as ${user.email}`, 'success', '/dashboard');
     } catch (error) {
       console.error('Google sign-in error:', error.code, error.message);
       showPopup('Google sign-in failed: ' + error.message, 'error');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      showPopup('Enter your email first, then tap “Forgot Password”.', 'error');
+      return;
+    }
+    try {
+      setSendingReset(true);
+
+      
+      const actionCodeSettings = {
+        url: `${window.location.origin}/reset-complete`,
+        handleCodeInApp: false, 
+      };
+
+      await sendPasswordResetEmail(auth, email, actionCodeSettings);
+
+      
+      showPopup(
+        'If an account exists for that email, a password reset link has been sent.',
+        'success'
+      );
+    } catch (err) {
+      console.error('Reset error:', err.code, err.message);
+      
+      showPopup(
+        'If an account exists for that email, a password reset link has been sent.',
+        'success'
+      );
+    } finally {
+      setSendingReset(false);
     }
   };
 
@@ -104,6 +156,7 @@ export default function AuthForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
         />
 
         {isSignUp && (
@@ -114,6 +167,7 @@ export default function AuthForm() {
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            autoComplete="name"
           />
         )}
 
@@ -124,6 +178,7 @@ export default function AuthForm() {
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete={isSignUp ? 'new-password' : 'current-password'}
         />
 
         {!isSignUp && (
@@ -131,12 +186,26 @@ export default function AuthForm() {
             <label>
               <input type="checkbox" /> Remember me
             </label>
-            <a href="#" className="forgot-link">Forgot Password</a>
+
+            
+            <button
+              type="button"
+              className="forgot-link"
+              onClick={handleForgotPassword}
+              disabled={sendingReset || submitting}
+              title="Reset your password"
+            >
+              {sendingReset ? 'Sending…' : 'Forgot Password'}
+            </button>
           </div>
         )}
 
-        <button type="submit" className="sign-in-button">
-          {isSignUp ? 'Create account' : 'Sign in'}
+        <button
+          type="submit"
+          className="sign-in-button"
+          disabled={submitting}
+        >
+          {submitting ? (isSignUp ? 'Creating…' : 'Signing in…') : (isSignUp ? 'Create account' : 'Sign in')}
         </button>
 
         {!isSignUp && (
@@ -146,6 +215,7 @@ export default function AuthForm() {
               type="button"
               className="google-button"
               onClick={handleGoogleSignIn}
+              disabled={submitting}
             >
               <img src="/google.png" alt="Google" className="google-icon" />
               Sign in with Google
@@ -155,9 +225,13 @@ export default function AuthForm() {
 
         <p className="toggle-link">
           {isSignUp ? 'Already have an account?' : 'Don’t have an account?'}{' '}
-          <span onClick={() => setIsSignUp(!isSignUp)} className="link">
+          <button
+            type="button"
+            onClick={() => setIsSignUp((v) => !v)}
+            className="link"
+          >
             {isSignUp ? 'Log in' : 'Sign up'}
-          </span>
+          </button>
         </p>
 
         <div className="footer-bottom">

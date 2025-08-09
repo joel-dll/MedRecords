@@ -10,7 +10,6 @@ export default function GreetingCard() {
     name: '',
     birthday: '',
     age: '',
-    role: '',
   });
   const [photoURL, setPhotoURL] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -41,7 +40,7 @@ export default function GreetingCard() {
             name: data.name || '',
             birthday: data.birthday || '',
             age,
-            role: data.role || '',
+            
           });
           setPhotoURL(data.photoURL || null);
         } else {
@@ -94,7 +93,6 @@ export default function GreetingCard() {
           name: userInfo.name,
           birthday: userInfo.birthday,
           age,
-          role: userInfo.role,
           email: user.email,
         },
         { merge: true }
@@ -167,12 +165,7 @@ export default function GreetingCard() {
               style={{ fontSize: '0.8rem', fontFamily: 'Poppins, sans-serif' }}
             />
 
-            <input
-              placeholder="Role (e.g., Wife, Son)"
-              value={userInfo.role}
-              onChange={(e) => setUserInfo({ ...userInfo, role: e.target.value })}
-              style={{ fontSize: '0.8rem', fontFamily: 'Poppins, sans-serif' }}
-            />
+            
 
             <button
               onClick={handleSaveInfo}

@@ -45,7 +45,11 @@ export default function WeightChart() {
       <h3>Weight Over Time</h3>
       <ResponsiveContainer  height={99} className="chart">
 
-        <LineChart data={data}>
+        <LineChart
+        data={[...data].sort(
+          (a, b) => new Date(a.date) - new Date(b.date) 
+        )}
+      >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
           <YAxis domain={['auto', 'auto']} label={{ value: 'kg', angle: -90, position: 'insideLeft' }} />
