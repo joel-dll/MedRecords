@@ -6,10 +6,11 @@ import {
   addDoc,
   onSnapshot,
   query,
-  Timestamp
+  Timestamp,
+  deleteDoc,
+  doc
 } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { deleteDoc, doc } from 'firebase/firestore';
 
 export default function BmiCalculator() {
   const [weight, setWeight] = useState('');
@@ -56,6 +57,7 @@ export default function BmiCalculator() {
     setWeight('');
     setHeight('');
   };
+
   const deleteBMI = async (entryId, userId) => {
     try {
       await deleteDoc(doc(db, `users/${userId}/bmiRecords/${entryId}`));
@@ -63,44 +65,80 @@ export default function BmiCalculator() {
       console.error('Failed to delete BMI record:', error);
     }
   };
+
+  
+  const classifyBMI = (bmi) => {
+    const v = typeof bmi === 'number' ? bmi : parseFloat(bmi || '0');
+    if (v >= 30) return { color: 'red', label: 'Obese' };          
+    if (v >= 25) return { color: 'yellow', label: 'Overweight' };  
+    if (v < 18.5) return { color: 'yellow', label: 'Underweight' };
+    return { color: 'green', label: 'Healthy' };                   
+  };
+
   return (
     <div className="bmi-card">
-      <h3>BMI Tracker</h3>
-      <div className="bmi-inputs">
-        <input
-          type="number"
-          placeholder="Weight (kg)"
-          value={weight}
-          onChange={(e) => setWeight(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Height (cm)"
-          value={height}
-          onChange={(e) => setHeight(e.target.value)}
-        />
-        <button onClick={calculateBMI}>Calculate</button>
-      </div>
+  <h3>BMI Tracker</h3>
+
+  
+  <div className="bmi-legend">
+    <span className="legend-item">
+      <span className="bmi-dot red"></span> Overweight
+    </span>
+    <span className="legend-item">
+      <span className="bmi-dot yellow"></span> Underweight
+    </span>
+    <span className="legend-item">
+      <span className="bmi-dot green"></span> Healthy
+    </span>
+  </div>
+
+  <div className="bmi-inputs">
+    <input
+      type="number"
+      placeholder="Weight (kg)"
+      value={weight}
+      onChange={(e) => setWeight(e.target.value)}
+    />
+    <input
+      type="number"
+      placeholder="Height (cm)"
+      value={height}
+      onChange={(e) => setHeight(e.target.value)}
+    />
+    <button onClick={calculateBMI}>Calculate</button>
+  </div>
+
+
 
       <ul className="bmi-list">
         {bmiList.length === 0 ? (
           <li>No records yet</li>
         ) : (
           bmiList
-            .sort((a, b) => b.createdAt?.seconds - a.createdAt?.seconds)
-            .map((entry) => (
-              <li key={entry.id} className="bmi-item">
-                {entry.bmi} BMI ({entry.weight}kg / {entry.height}cm) —{' '}
-                {entry.createdAt?.toDate().toLocaleDateString()}
-                <button
-                  className="delete-bmi"
-                  onClick={() => deleteBMI(entry.id, userId)}
-                  title="Delete entry"
-                >
-                  ×
-                </button>
-              </li>
-            ))
+            .sort((a, b) => b.createdAt?.seconds - a.createdAt?.seconds) 
+            .map((entry) => {
+              const { color, label } = classifyBMI(entry.bmi);
+              return (
+                <li key={entry.id} className="bmi-item">
+                  <span
+                    className={`bmi-dot ${color}`}
+                    title={label}
+                    aria-label={label}
+                  />
+                  <span className="bmi-text">
+                    {entry.bmi} BMI ({entry.weight}kg / {entry.height}cm) —{' '}
+                    {entry.createdAt?.toDate().toLocaleDateString()}
+                  </span>
+                  <button
+                    className="delete-bmi"
+                    onClick={() => deleteBMI(entry.id, userId)}
+                    title="Delete entry"
+                  >
+                    ×
+                  </button>
+                </li>
+              );
+            })
         )}
       </ul>
     </div>
