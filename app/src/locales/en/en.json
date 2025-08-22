@@ -1,0 +1,190 @@
+{
+  "brand": "MedRecords",
+
+  "nav": {
+    "dashboard": "Dashboard",
+    "records": "My Records",
+    "family": "Family",
+    "settings": "Settings",
+    "logout": "Log Out"
+  },
+
+  "actions": {
+    "edit": "Edit Info",
+    "save": "Save",
+    "save_changes": "Save Changes",
+    "cancel": "Cancel",
+    "add": "Add",
+    "upload": "Upload",
+    "ok": "OK",
+    "view": "View",
+    "remove": "Remove",
+    "edit_link": "Edit",
+    "calculate": "Calculate",
+    "delete": "Delete"
+  },
+
+  "units": {
+    "kg": "kg",
+    "cm": "cm",
+    "bmi": "BMI"
+  },
+
+  "statuses": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "pending": "Pending"
+  },
+
+  "placeholders": {
+    "search": "Search...",
+    "email_example": "e.g. doctor@example.com",
+    "weight": "Weight (kg)",
+    "height": "Height (cm)",
+    "reminder": "Enter a reminder..."
+  },
+
+  "greetings": {
+    "welcome": "Welcome, {{name}}",
+    "age_years": "{{count}} years old",
+    "weight_over_time": "Weight Over Time"
+  },
+
+  "assessment": {
+    "title": "Predictive Health Risk Assessment",
+    "intro": "Fill in your health details and get a predictive analysis using AI.",
+    "history": "Medical History",
+    "family_history": "Family History",
+    "lifestyle": "Lifestyle Factors",
+    "btn": "Get Prediction",
+    "assistant_title": "AI Assistant",
+    "assistant_placeholder": "Ask something like 'Translate to Spanish and summarize...'",
+    "assistant_generate": "Generate"
+  },
+
+  "bmi": {
+    "title": "BMI Tracker",
+    "overweight": "Overweight",
+    "underweight": "Underweight",
+    "healthy": "Healthy",
+    "weight_placeholder": "Weight (kg)",
+    "height_placeholder": "Height (cm)",
+    "empty": "No records yet",
+    "delete_entry": "Delete entry",
+    "legend": {
+      "overweight": "Overweight",
+      "underweight": "Underweight",
+      "healthy": "Healthy"
+    }
+  },
+
+  "reminders": {
+    "title": "Upcoming Health Reminders",
+    "empty": "No reminders yet",
+    "placeholder": "Enter a reminder...",
+    "date_placeholder": "dd/mm/yyyy"
+  },
+
+  "family": {
+    "title": "Family",
+    "add_member": "Add Family Member"
+  },
+
+  "my_family": {
+    "title": "My Family",
+    "add_member": "Add Family Member",
+    "age_role": "{{count}} years old, {{role}}",
+    "roles": {
+      "son": "Son",
+      "daughter": "Daughter"
+    }
+  },
+
+  "records": {
+    "choose_file": "Choose File",
+    "name": "Name",
+    "select_category": "Select Category",
+    "country": "Country",
+    "filter_by_category": "Filter by Category",
+    "types": {
+      "all": "All",
+      "allergy": "Allergy",
+      "report": "Report",
+      "diagnosis": "Diagnosis"
+    },
+    "card_actions": {
+      "view": "View",
+      "download": "Download",
+      "share": "Share",
+      "delete": "Delete"
+    }
+  },
+
+  "marketing": {
+    "about": "About Us",
+    "newsletter": "Newsletter",
+    "contact": "Contact Us",
+    "services": "Our Services",
+
+    "about_title": "About Us",
+    "about_text": "MedRecords is your secure platform for managing and accessing personal and family medical records anytime, anywhere.",
+
+    "newsletter_title": "Subscribe to our Newsletter",
+    "newsletter_placeholder": "Enter your email",
+    "newsletter_cta": "Subscribe",
+    "newsletter_success_title": "Success!",
+    "newsletter_success_text": "Your email has been subscribed successfully!",
+    "newsletter_error_title": "Error!",
+    "newsletter_error_text": "There was an error subscribing your email. Please try again later.",
+
+    "contact_title": "Contact Us",
+    "contact_name": "Your Name",
+    "contact_email": "Your Email",
+    "contact_message": "Your Message",
+    "contact_send": "Send",
+    "contact_success_title": "Success!",
+    "contact_success_text": "Your message has been sent successfully.",
+    "contact_error_title": "Error",
+    "contact_error_text": "There was an error sending your message. Please try again later.",
+
+    "services_title": "Our Services",
+    "services_list": {
+      "storage": "Secure Record Storage",
+      "history": "Appointment History",
+      "family": "Family Health Access",
+      "sharing": "Medical File Sharing"
+    }
+  },
+
+  "share": {
+    "share_prompt": "Enter the recipient's email (e.g., your GP, specialist, or family member):",
+    "confirm_delete": "Are you sure you want to delete \"{{name}}\"?"
+  },
+
+  "settings": {
+    "title": "Profile & Settings",
+    "subtitle": "Keep your personal, health, and account details up to date",
+    "sections": {
+      "personal": "Personal Info",
+      "health": "Health Info",
+      "account": "Account"
+    },
+    "fields": {
+      "full_name": "Full Name",
+      "birthdate": "Birthdate",
+      "age": "Age",
+      "address": "Address",
+      "nationality": "Nationality",
+      "place_of_birth": "Place of Birth",
+      "mobile": "Mobile Number",
+      "passport": "Passport Number",
+      "healthcare_number": "Healthcare Number",
+      "healthcare_unit": "Healthcare Unit (GP)",
+      "sex": "Sex",
+      "blood_group": "Blood Group",
+      "medications": "Medications (daily)",
+      "conditions": "Health Conditions",
+      "email_login": "Email (login)"
+    }
+  }
+}

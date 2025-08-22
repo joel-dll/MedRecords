@@ -1,0 +1,190 @@
+{
+  "brand": "MedRecords",
+
+  "nav": {
+    "dashboard": "Painel",
+    "records": "Meus Registos",
+    "family": "Família",
+    "settings": "Definições",
+    "logout": "Sair"
+  },
+
+  "actions": {
+    "edit": "Editar Informação",
+    "save": "Guardar",
+    "save_changes": "Guardar Alterações",
+    "cancel": "Cancelar",
+    "add": "Adicionar",
+    "upload": "Carregar",
+    "ok": "OK",
+    "view": "Ver",
+    "remove": "Remover",
+    "edit_link": "Editar",
+    "calculate": "Calcular",
+    "delete": "Eliminar"
+  },
+
+  "units": {
+    "kg": "kg",
+    "cm": "cm",
+    "bmi": "IMC"
+  },
+
+  "statuses": {
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "pending": "Pendente"
+  },
+
+  "placeholders": {
+    "search": "Pesquisar...",
+    "email_example": "ex.: medico@exemplo.com",
+    "weight": "Peso (kg)",
+    "height": "Altura (cm)",
+    "reminder": "Insira um lembrete..."
+  },
+
+  "greetings": {
+    "welcome": "Bem-vindo(a), {{name}}",
+    "age_years": "{{count}} anos",
+    "weight_over_time": "Peso ao longo do tempo"
+  },
+
+  "assessment": {
+    "title": "Avaliação Preditiva de Risco de Saúde",
+    "intro": "Preencha os seus dados de saúde e obtenha uma análise preditiva com IA.",
+    "history": "Histórico Médico",
+    "family_history": "Histórico Familiar",
+    "lifestyle": "Fatores de Estilo de Vida",
+    "btn": "Obter Previsão",
+    "assistant_title": "Assistente de IA",
+    "assistant_placeholder": "Peça algo como 'Traduz para Espanhol e resume...'",
+    "assistant_generate": "Gerar"
+  },
+
+  "bmi": {
+    "title": "Registo de IMC",
+    "overweight": "Acima do peso",
+    "underweight": "Abaixo do peso",
+    "healthy": "Saudável",
+    "weight_placeholder": "Peso (kg)",
+    "height_placeholder": "Altura (cm)",
+    "empty": "Ainda sem registos",
+    "delete_entry": "Eliminar registo",
+    "legend": {
+      "overweight": "Acima do peso",
+      "underweight": "Abaixo do peso",
+      "healthy": "Saudável"
+    }
+  },
+
+  "reminders": {
+    "title": "Próximos Lembretes de Saúde",
+    "empty": "Ainda não há lembretes",
+    "placeholder": "Insira um lembrete...",
+    "date_placeholder": "dd/mm/aaaa"
+  },
+
+  "family": {
+    "title": "Família",
+    "add_member": "Adicionar Membro da Família"
+  },
+
+  "my_family": {
+    "title": "A Minha Família",
+    "add_member": "Adicionar Membro da Família",
+    "age_role": "{{count}} anos, {{role}}",
+    "roles": {
+      "son": "Filho",
+      "daughter": "Filha"
+    }
+  },
+
+  "records": {
+    "choose_file": "Escolher Ficheiro",
+    "name": "Nome",
+    "select_category": "Selecionar Categoria",
+    "country": "País",
+    "filter_by_category": "Filtrar por Categoria",
+    "types": {
+      "all": "Todos",
+      "allergy": "Alergia",
+      "report": "Relatório",
+      "diagnosis": "Diagnóstico"
+    },
+    "card_actions": {
+      "view": "Ver",
+      "download": "Transferir",
+      "share": "Partilhar",
+      "delete": "Eliminar"
+    }
+  },
+
+  "marketing": {
+    "about": "Sobre Nós",
+    "newsletter": "Newsletter",
+    "contact": "Contacte-nos",
+    "services": "Os Nossos Serviços",
+
+    "about_title": "Sobre Nós",
+    "about_text": "A MedRecords é a sua plataforma segura para gerir e aceder a registos médicos pessoais e familiares em qualquer lugar, a qualquer momento.",
+
+    "newsletter_title": "Subscreva a nossa Newsletter",
+    "newsletter_placeholder": "Introduza o seu email",
+    "newsletter_cta": "Subscrever",
+    "newsletter_success_title": "Sucesso!",
+    "newsletter_success_text": "O seu email foi subscrito com sucesso!",
+    "newsletter_error_title": "Erro!",
+    "newsletter_error_text": "Ocorreu um erro ao subscrever o seu email. Tente novamente mais tarde.",
+
+    "contact_title": "Contacte-nos",
+    "contact_name": "O seu Nome",
+    "contact_email": "O seu Email",
+    "contact_message": "A sua Mensagem",
+    "contact_send": "Enviar",
+    "contact_success_title": "Sucesso!",
+    "contact_success_text": "A sua mensagem foi enviada com sucesso.",
+    "contact_error_title": "Erro",
+    "contact_error_text": "Ocorreu um erro ao enviar a sua mensagem. Tente novamente mais tarde.",
+
+    "services_title": "Os Nossos Serviços",
+    "services_list": {
+      "storage": "Armazenamento Seguro de Registos",
+      "history": "Histórico de Consultas",
+      "family": "Acesso à Saúde da Família",
+      "sharing": "Partilha de Ficheiros Médicos"
+    }
+  },
+
+  "share": {
+    "share_prompt": "Introduza o email do destinatário (ex.: o seu médico de família, especialista ou familiar):",
+    "confirm_delete": "Tem a certeza de que pretende eliminar \"{{name}}\"?"
+  },
+
+  "settings": {
+    "title": "Perfil & Definições",
+    "subtitle": "Mantenha os seus dados pessoais, de saúde e da conta atualizados",
+    "sections": {
+      "personal": "Informação Pessoal",
+      "health": "Informação de Saúde",
+      "account": "Conta"
+    },
+    "fields": {
+      "full_name": "Nome Completo",
+      "birthdate": "Data de Nascimento",
+      "age": "Idade",
+      "address": "Morada",
+      "nationality": "Nacionalidade",
+      "place_of_birth": "Local de Nascimento",
+      "mobile": "Telemóvel",
+      "passport": "Nº de Passaporte",
+      "healthcare_number": "Nº de Utente",
+      "healthcare_unit": "Unidade de Saúde (Médico de Família)",
+      "sex": "Sexo",
+      "blood_group": "Grupo Sanguíneo",
+      "medications": "Medicação (diária)",
+      "conditions": "Condições de Saúde",
+      "email_login": "Email (login)"
+    }
+  }
+}

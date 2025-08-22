@@ -1117,11 +1117,10 @@ html, body {
   gap: 1.5rem;
   padding: 2rem;
   margin-top: 1rem;
-
-  
-  max-height: 32vh; 
-  overflow-y:scroll;
-  
+  max-height: 2000rem;
+  overflow: auto;
+  flex: 1;
+  min-height: 328px;
 }
 
 
@@ -1976,6 +1975,101 @@ body {
   color: #446666;
   font-weight: 300;
 }
+
+
+.dashboard-footer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;                  
+  align-items: center;
+  justify-content: center;
+  gap: 10px 16px;                   
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: #bfdad5;
+  z-index: 10;
+}
+
+.dashboard-footer .footer-nav {
+  order: 1;                         
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;          
+  gap: 16px 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.dashboard-footer .footer-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  line-height: 1.9;                 
+  opacity: 0.9;
+}
+.dashboard-footer .footer-link:hover { opacity: 1; text-decoration: underline; }
+
+.dashboard-footer .footer-right {
+  order: 2;                         
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-footer .lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+}
+.dashboard-footer .lang-icon { margin-right: 6px; }
+.dashboard-footer .lang-item { cursor: pointer; opacity: 0.7; }
+.dashboard-footer .lang-item:hover { opacity: 1; }
+.dashboard-footer .lang-item.active { font-weight: 300; text-decoration: underline; opacity: 1; }
+.dashboard-footer .lang-sep { margin: 0 6px; opacity: 0.6; }
+
+
+@media (min-width: 600px) {
+  .dashboard-footer { gap: 12px 22px; padding: 12px 20px; }
+  .dashboard-footer .footer-nav { font-size: 15px; gap: 18px 30px; }
+  .dashboard-footer .lang-switcher { font-size: 13.5px; }
+}
+
+
+@media (min-width: 960px) {
+  .dashboard-footer {
+    flex-wrap: nowrap;              
+    justify-content: space-between; 
+  }
+
+  .dashboard-footer .footer-nav {
+    order: 1;
+    width: auto;
+    flex: 1;                        
+    justify-content: center;
+    gap: 28px 36px;
+    font-size: 15px;
+    font-weight: 300;               
+  }
+
+  .dashboard-footer .footer-right {
+    order: 2;
+    width: auto;
+    margin-left: auto;              
+    justify-content: flex-end;
+  }
+}
+
+
+
 
 
 @media (max-width: 600px) {

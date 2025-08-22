@@ -1,19 +1,21 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, db } from '../lib/firebase'; 
+import { auth, db } from '../lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { getHealthRiskPrediction } from '@/utils/getHealthRiskPrediction';
 import { sendPredictionEmail } from '../../utils/sendPredictionEmail';
-import { SiGooglegemini } from "react-icons/si";
-import { PiRobotThin } from "react-icons/pi";
+import { SiGooglegemini } from 'react-icons/si';
+import { PiRobotThin } from 'react-icons/pi';
 import PopUpMessage from '../components/PopUpMessage';
+import { useTranslation } from 'react-i18next';
 
 export default function PredictiveHealthRiskAssessment() {
+  const { t } = useTranslation();
   const [medicalHistory, setMedicalHistory] = useState('');
   const [familyHistory, setFamilyHistory] = useState('');
-  const [age, setAge] = useState('');
+  const [age, setAge] = useState(''); 
   const [lifestyle, setLifestyle] = useState('');
   const [prediction, setPrediction] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,11 +30,7 @@ export default function PredictiveHealthRiskAssessment() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserId(user.uid);
-      } else {
-        setUserId(null);
-      }
+      setUserId(user?.uid || null);
     });
     return () => unsubscribe();
   }, []);
@@ -45,29 +43,38 @@ export default function PredictiveHealthRiskAssessment() {
 
   const handleSubmit = async () => {
     if (!userId) {
-      setPrediction('Please sign in to get predictions.');
+      setPrediction(
+        t('auth.sign_in_required', { defaultValue: 'Please sign in to get predictions.' })
+      );
+      return;
+    }
+
+    
+    const ageNum = Number(age);
+    if (!Number.isFinite(ageNum) || ageNum <= 0) {
+      setPrediction(t('assessment.invalid_age', { defaultValue: 'Please enter a valid age.' }));
       return;
     }
 
     setLoading(true);
     setPrediction('');
-    setEmailSent(false); 
+    setEmailSent(false);
 
     try {
       const result = await getHealthRiskPrediction({
         medicalHistory,
         familyHistory,
-        age,
+        age: ageNum,
         lifestyle,
-        userId,
+        userId
       });
       setPrediction(result);
     } catch (error) {
       console.error('Prediction failed:', error);
-      setPrediction('Something went wrong. Please try again.');
+      setPrediction(t('common.error_try_again', { defaultValue: 'Something went wrong. Please try again.' }));
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   const handleSendEmail = async () => {
@@ -82,74 +89,94 @@ export default function PredictiveHealthRiskAssessment() {
 
       if (sent) {
         setEmailSent(true);
-        setPopupMsg('Prediction sent to your email!');
+        setPopupMsg(t('email.prediction_sent', { defaultValue: 'Prediction sent to your email!' }));
         setPopupType('success');
         setShowPopup(true);
       } else {
-        setPopupMsg('Failed to send email.');
+        setPopupMsg(t('email.prediction_send_failed', { defaultValue: 'Failed to send email.' }));
         setPopupType('error');
         setShowPopup(true);
       }
     } catch (error) {
       console.error('Email send error:', error);
-      setPopupMsg('Error sending email.');
+      setPopupMsg(t('email.prediction_send_error', { defaultValue: 'Error sending email.' }));
       setPopupType('error');
       setShowPopup(true);
     }
   };
 
+  const canSubmit =
+    !!userId &&
+    !loading &&
+    (medicalHistory.trim().length > 0 ||
+      familyHistory.trim().length > 0 ||
+      lifestyle.trim().length > 0) &&
+    Number.isFinite(Number(age)) &&
+    Number(age) > 0;
+
   return (
     <div className="predict-card">
-      <h3>Predictive Health Risk Assessment</h3>
+      <h3>{t('assessment.title')}</h3>
+
       <p className="predict-description">
-        Fill in your health details and get a predictive analysis using AI.<PiRobotThin className="robot-icon" />
+        {t('assessment.intro')} <PiRobotThin className="robot-icon" />
       </p>
 
       {!userId && (
         <p style={{ color: 'red', marginBottom: '1rem' }}>
-          You must be signed in to use this feature.
+          {t('auth.sign_in_required', { defaultValue: 'You must be signed in to use this feature.' })}
         </p>
       )}
 
       <div className="predict-form">
         <textarea
-          placeholder="Medical History"
+          placeholder={t('assessment.history')}
           value={medicalHistory}
           onChange={(e) => setMedicalHistory(e.target.value)}
+          aria-label={t('assessment.history')}
         />
         <textarea
-          placeholder="Family History"
+          placeholder={t('assessment.family_history')}
           value={familyHistory}
           onChange={(e) => setFamilyHistory(e.target.value)}
+          aria-label={t('assessment.family_history')}
         />
         <textarea
-          placeholder="Lifestyle Factors"
+          placeholder={t('assessment.lifestyle')}
           value={lifestyle}
           onChange={(e) => setLifestyle(e.target.value)}
+          aria-label={t('assessment.lifestyle')}
         />
-        <button onClick={handleSubmit} disabled={loading} className="prediction-button">
-          {loading ? (
-            <>
-              <SiGooglegemini className="icon" />
-              Analyzing...
-            </>
-          ) : (
-            <>
-              <SiGooglegemini className="icon" />
-              Get Prediction
-            </>
-          )}
+        <input
+          type="number"
+          inputMode="numeric"
+          min="1"
+          placeholder={t('settings.fields.age')}
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+          aria-label={t('settings.fields.age')}
+        />
+
+        <button onClick={handleSubmit} disabled={!canSubmit} className="prediction-button">
+          <SiGooglegemini className="icon" />
+          {loading
+            ? t('assessment.analyzing', { defaultValue: 'Analyzing...' })
+            : t('assessment.btn')}
         </button>
       </div>
 
       {prediction && (
         <div className="predict-result" ref={predictionRef}>
-          <strong>AI Prediction:</strong>
+          <strong>{t('assessment.result_title', { defaultValue: 'AI Prediction:' })}</strong>
           <p>{prediction}</p>
 
           {!emailSent && (
-            <button onClick={handleSendEmail} className="email-button" style={{ marginTop: '1rem' }}>
-              Send to My Email
+            <button
+              onClick={handleSendEmail}
+              className="email-button"
+              style={{ marginTop: '1rem' }}
+            >
+              {t('email.send_to_me', { defaultValue: 'Send to My Email' })}
             </button>
           )}
         </div>

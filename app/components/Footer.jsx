@@ -1,17 +1,20 @@
 'use client';
+
 import React, { useState } from 'react';
 import PopUpFooter from './Pop-UpFooter';
 import { db } from '../lib/firebase';
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Footer() {
   const [popUpType, setPopUpType] = useState(null);
-
+  const { t } = useTranslation(); 
   const footerItems = [
-    { label: 'About Us', type: 'about' },
-    { label: 'Newsletter', type: 'newsletter' },
-    { label: 'Contact Us', type: 'contact' },
-    { label: 'Our Services', type: 'services' },
+    { label: t('marketing.about'), type: 'about' },
+    { label: t('marketing.newsletter'), type: 'newsletter' },
+    { label: t('marketing.contact'), type: 'contact' },
+    { label: t('marketing.services'), type: 'services' }
   ];
 
   const openPopUp = (type) => setPopUpType(type);
@@ -22,29 +25,27 @@ export default function Footer() {
       case 'about':
         return (
           <>
-            <h2>About Us</h2>
-            <p><br />MedRecords is your secure platform for managing and accessing personal and family medical records anytime, anywhere.</p>
+            <h2>{t('marketing.about_title')}</h2>
+            <p><br />{t('marketing.about_text')}</p>
           </>
         );
 
       case 'newsletter':
         return (
           <>
-            <h2>Subscribe to our Newsletter</h2>
+            <h2>{t('marketing.newsletter_title')}</h2>
             <form
               className="newsletter-form"
               onSubmit={async (e) => {
                 e.preventDefault();
-                const email = e.target.email.value;
-
+                const email = e.currentTarget.email.value.trim();
                 if (!email) return;
-
                 try {
                   await addDoc(collection(db, 'newsletterEmails'), {
                     email,
-                    subscribedAt: Timestamp.now(),
+                    subscribedAt: serverTimestamp(),
                   });
-                  e.target.reset();
+                  e.currentTarget.reset();
                   setPopUpType('successMessageNewsletter');
                 } catch (error) {
                   console.error('Error subscribing:', error);
@@ -55,11 +56,10 @@ export default function Footer() {
               <input
                 type="email"
                 name="email"
-                placeholder="Enter your email"
-                className="newsletter-input"
+                placeholder={t('marketing.newsletter_placeholder')}
                 required
               />
-              <button type="submit" className="newsletter-button">Subscribe</button>
+              <button type="submit">{t('marketing.newsletter_cta')}</button>
             </form>
           </>
         );
@@ -67,23 +67,24 @@ export default function Footer() {
       case 'contact':
         return (
           <>
-            <h2>Contact Us</h2>
+            <h2>{t('marketing.contact_title')}</h2>
             <form
               className="contact-form"
               onSubmit={async (e) => {
                 e.preventDefault();
-                const name = e.target.name.value;
-                const email = e.target.email.value;
-                const message = e.target.message.value;
+                const name = e.currentTarget.name.value.trim();
+                const email = e.currentTarget.email.value.trim();
+                const message = e.currentTarget.message.value.trim();
+                if (!name || !email || !message) return;
 
                 try {
                   await addDoc(collection(db, 'contactMessages'), {
                     name,
                     email,
                     message,
-                    sentAt: Timestamp.now(),
+                    sentAt: serverTimestamp(),
                   });
-                  e.target.reset();
+                  e.currentTarget.reset();
                   setPopUpType('successMessage');
                 } catch (error) {
                   console.error('Error sending message:', error);
@@ -91,10 +92,24 @@ export default function Footer() {
                 }
               }}
             >
-              <input type="text" name="name" placeholder="Your Name" required />
-              <input type="email" name="email" placeholder="Your Email" required />
-              <textarea name="message" placeholder="Your Message" required></textarea>
-              <button type="submit">Send</button>
+              <input
+                type="text"
+                name="name"
+                placeholder={t('marketing.contact_name')}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder={t('marketing.contact_email')}
+                required
+              />
+              <textarea
+                name="message"
+                placeholder={t('marketing.contact_message')}
+                required
+              />
+              <button type="submit">{t('marketing.contact_send')}</button>
             </form>
           </>
         );
@@ -102,12 +117,12 @@ export default function Footer() {
       case 'services':
         return (
           <>
-            <h2>Our Services</h2>
+            <h2>{t('marketing.services_title')}</h2>
             <ul className="footer-services">
-              <li>Secure Record Storage</li>
-              <li>Appointment History</li>
-              <li>Family Health Access</li>
-              <li>Medical File Sharing</li>
+              <li>{t('marketing.services_list.storage')}</li>
+              <li>{t('marketing.services_list.history')}</li>
+              <li>{t('marketing.services_list.family')}</li>
+              <li>{t('marketing.services_list.sharing')}</li>
             </ul>
           </>
         );
@@ -115,32 +130,32 @@ export default function Footer() {
       case 'successMessageNewsletter':
         return (
           <div className="popup-message">
-            <h2>Success!</h2>
-            <p>Your email has been subscribed successfully!</p>
+            <h2>{t('marketing.newsletter_success_title')}</h2>
+            <p>{t('marketing.newsletter_success_text')}</p>
           </div>
         );
 
       case 'errorMessageNewsletter':
         return (
           <div className="popup-message">
-            <h2>Error!</h2>
-            <p>There was an error subscribing your email. Please try again later.</p>
+            <h2>{t('marketing.newsletter_error_title')}</h2>
+            <p>{t('marketing.newsletter_error_text')}</p>
           </div>
         );
 
       case 'successMessage':
         return (
           <div className="popup-message">
-            <h2>Success!</h2>
-            <p>Your message has been sent successfully.</p>
+            <h2>{t('marketing.contact_success_title')}</h2>
+            <p>{t('marketing.contact_success_text')}</p>
           </div>
         );
 
       case 'errorMessage':
         return (
           <div className="popup-message">
-            <h2>Error</h2>
-            <p>There was an error sending your message. Please try again later.</p>
+            <h2>{t('marketing.contact_error_title')}</h2>
+            <p>{t('marketing.contact_error_text')}</p>
           </div>
         );
 
@@ -152,23 +167,30 @@ export default function Footer() {
   return (
     <>
       <footer className="dashboard-footer">
-        {footerItems.map(({ label, type }) => (
-          <div key={type} className="footer-column">
-            <h4 onClick={() => openPopUp(type)}>{label}</h4>
-            
-          </div>
-         
-        ))}
+        <ul className="footer-nav">
+          {footerItems.map(({ label, type }) => (
+            <li key={type}>
+              <button
+                type="button"
+                className="footer-link"
+                onClick={() => openPopUp(type)}
+              >
+                {label}
+              </button>
+            </li>
+          ))}
+        </ul>
 
-          
+        <div className="footer-right">
+          <LanguageSwitcher />
+        </div>
       </footer>
-      
+
       {popUpType && (
         <PopUpFooter onClose={closePopUp}>
           {renderPopUpContent()}
         </PopUpFooter>
       )}
     </>
-    
   );
 }
