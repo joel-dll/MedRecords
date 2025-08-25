@@ -8,8 +8,7 @@ import emailjs from 'emailjs-com';
 import PopUpMessage from '../components/PopUpMessage';
 import { PiRobotThin } from 'react-icons/pi';
 
-// Optional, extra-safe against prerendering:
-// export const dynamic = 'force-dynamic';
+
 
 function AIPageInner() {
   const [fileUrl, setFileUrl] = useState('');

@@ -8,8 +8,7 @@ import emailjs from 'emailjs-com';
 import PopUpMessage from '../components/PopUpMessage';
 import { PiRobotThin } from 'react-icons/pi';
 
-// Optional: if you want to be explicit that this page is dynamic
-// export const dynamic = 'force-dynamic';
+
 
 function FamilyAIInner() {
   const [fileUrl, setFileUrl] = useState('');
