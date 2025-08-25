@@ -1,5 +1,5 @@
 'use client';
-import { Suspense } from 'react';
+
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { storage } from '../lib/firebase';
