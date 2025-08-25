@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { storage } from '../lib/firebase';
 import { getDownloadURL, ref } from 'firebase/storage';
@@ -8,7 +8,10 @@ import emailjs from 'emailjs-com';
 import PopUpMessage from '../components/PopUpMessage';
 import { PiRobotThin } from 'react-icons/pi';
 
-export default function FamilyAIPage() {
+// Optional: if you want to be explicit that this page is dynamic
+// export const dynamic = 'force-dynamic';
+
+function FamilyAIInner() {
   const [fileUrl, setFileUrl] = useState('');
   const [fileType, setFileType] = useState('');
   const [userPrompt, setUserPrompt] = useState('');
@@ -69,9 +72,7 @@ export default function FamilyAIPage() {
     }
   };
 
-  const handleShare = () => {
-    setShowEmailInput(true);
-  };
+  const handleShare = () => setShowEmailInput(true);
 
   const handleEmailSubmit = async (email) => {
     setShowEmailInput(false);
@@ -118,7 +119,10 @@ export default function FamilyAIPage() {
         </div>
 
         <div className="ai-panel">
-          <h3> Ai Assistant  <PiRobotThin className="robot-icon-aipage" /></h3>
+          <h3>
+            Ai Assistant <PiRobotThin className="robot-icon-aipage" />
+          </h3>
+
           <textarea
             placeholder="Ask something like 'Translate to Spanish and summarize...'"
             value={userPrompt}
@@ -130,26 +134,26 @@ export default function FamilyAIPage() {
           </button>
 
           {aiResult && (
-            <>
-              <div className="result">
-                <h4>AI Result</h4>
-                <p>{aiResult}</p>
-                <button className="button-ai-share" onClick={handleShare}>
-                  Share
-                </button>
-                <button
+            <div className="result">
+              <h4>AI Result</h4>
+              <p>{aiResult}</p>
+              <button className="button-ai-share" onClick={handleShare}>
+                Share
+              </button>
+              <button
                 className="button-ai-copy"
                 onClick={() => {
+                  if (navigator?.clipboard?.writeText) {
                     navigator.clipboard.writeText(aiResult);
                     setPopupMsg('Text copied to clipboard!');
                     setPopupType('success');
                     setShowPopup(true);
+                  }
                 }}
-                >
+              >
                 Copy Text
-                </button>
-              </div>
-            </>
+              </button>
+            </div>
           )}
 
           {showPopup && (
@@ -173,5 +177,13 @@ export default function FamilyAIPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function FamilyAIPage() {
+  return (
+    <Suspense fallback={<div className="ai-page"><p>Loading AI page…</p></div>}>
+      <FamilyAIInner />
+    </Suspense>
   );
 }
