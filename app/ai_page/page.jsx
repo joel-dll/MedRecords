@@ -8,6 +8,7 @@ import emailjs from 'emailjs-com';
 import PopUpMessage from '../components/PopUpMessage';
 import { PiRobotThin } from 'react-icons/pi';
 
+import Link from 'next/link';
 
 
 function AIPageInner() {

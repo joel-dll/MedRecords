@@ -2273,3 +2273,27 @@ body {
   .dashboard-nav.open { display: block; }
   .dashboard-nav-list { flex-direction: column; align-items: flex-start; }
 }
+
+.upload-placeholder {
+  
+  color: #4a4a4a; 
+}
+
+.lang-item {
+  
+  color: #3a3f3e; 
+}
+
+.lang-item.active { 
+  background: #a6cfc8;              
+  color: #2f3534;                   
+}
+
+:root {
+  --fg-strong: #4a4a4a;    
+  --chip-fg:   #3a3f3e;
+  --chip-bg:   #bfdad5;
+}
+.upload-placeholder { color: var(--fg-strong); }
+.lang-item { color: var(--chip-fg); background: var(--chip-bg); }
+:focus-visible { outline: 3px solid #1a73e8; }
