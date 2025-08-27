@@ -592,7 +592,7 @@ html, body {
   justify-content: center;
   align-items: center;
   background-color: #e3e3e3;
-  color: #666;
+  color: #464646;
   cursor: pointer;
   text-align: center;
   padding: 0.3rem;
@@ -2274,19 +2274,28 @@ body {
   .dashboard-nav-list { flex-direction: column; align-items: flex-start; }
 }
 
-.upload-placeholder {
-  
-  color: #4a4a4a; 
-}
+
 
 .lang-item {
-  
-  color: #3a3f3e; 
+
+  color: #3a3f3e;           
+  background: #bfdad5;
+  border-radius: 8px;
+  padding: .25rem .5rem;
+  line-height: 1.2;
 }
 
-.lang-item.active { 
-  background: #a6cfc8;              
-  color: #2f3534;                   
+
+.lang-item:hover { background: #b4d3cd; }       
+.lang-item:focus-visible {
+  outline: 3px solid #1a73e8;                  
+  outline-offset: 2px;
+}
+
+
+.lang-item[aria-pressed="true"] {
+  background: #a6cfc8;                          
+  color: #2f3534;                               
 }
 
 :root {
