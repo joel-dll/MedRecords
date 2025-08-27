@@ -1,4 +1,3 @@
-
 import './styles/globals.css';
 import { Poppins } from 'next/font/google';
 import LayoutWrapper from './components/LayoutWrapper';
@@ -18,9 +17,31 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={poppins.className}>
+        
+        <a className="skip-link" href="#main">Skip to content</a>
+
+        
+        <header role="banner">
+          
+        </header>
+
+        <nav aria-label="Primary">
+          
+        </nav>
+
         <I18nProvider>
-          <LayoutWrapper>{children}</LayoutWrapper>
+          
+          <main id="main" role="main">
+            <LayoutWrapper>{children}</LayoutWrapper>
+          </main>
         </I18nProvider>
+
+        <footer role="contentinfo">
+          
+        </footer>
+
+        
+        <div id="sr-status" className="sr-only" aria-live="polite" />
       </body>
     </html>
   );

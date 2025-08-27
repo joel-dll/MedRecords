@@ -2231,3 +2231,45 @@ body {
     max-width: 450px;
   }
 }
+
+
+
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px; top: 0;
+  z-index: 1000;
+}
+.skip-link:focus {
+  left: 1rem; top: 1rem;
+  padding: .5rem 1rem;
+  background: #fff;
+  border-radius: .375rem;
+  outline: 3px solid #5b9dd9;
+  outline-offset: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+:focus-visible {
+  outline: 3px solid #5b9dd9;
+  outline-offset: 2px;
+}
+
+
+.active-link { text-decoration: underline; text-underline-offset: 4px; }
+:focus-visible { outline: 3px solid #5b9dd9; outline-offset: 2px; }
+
+.dashboard-nav-list { display: flex; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+
+@media (max-width: 768px) {
+  .dashboard-nav { display: none; }
+  .dashboard-nav.open { display: block; }
+  .dashboard-nav-list { flex-direction: column; align-items: flex-start; }
+}
