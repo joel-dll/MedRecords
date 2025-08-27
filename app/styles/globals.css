@@ -588,11 +588,12 @@ html, body {
   width: 100%;
   height: 100%;
   display: flex;
+  font-weight: normal;
   font-size: 0.7rem;
   justify-content: center;
   align-items: center;
-  background-color: #e3e3e3;
-  color: #464646;
+  color: #454545;   
+  background: #e3e3e3;
   cursor: pointer;
   text-align: center;
   padding: 0.3rem;
@@ -2276,27 +2277,47 @@ body {
 
 
 
-.lang-item {
+/* Container */
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
 
-  color: #3a3f3e;           
-  background: #bfdad5;
+/* Decorative icon only */
+.lang-icon { width: 18px; height: 18px; }
+
+/* Ensure AA contrast: text #3a3f3e on bg #bfdad5 ≈ ~7:1 */
+.lang-item {
+  background: #bfdad5;      /* existing chip bg */
+  color: #3a3f3e;           /* darker text to pass AA comfortably */
+  border: 1px solid transparent;
   border-radius: 8px;
   padding: .25rem .5rem;
   line-height: 1.2;
+  font-size: 0.875rem;      /* ~14px */
+  cursor: pointer;
 }
 
+/* Hover keeps contrast */
+.lang-item:hover { background: #b4d3cd; }  /* still passes with #3a3f3e */
 
-.lang-item:hover { background: #b4d3cd; }       
+/* Focus visible ring (good contrast) */
 .lang-item:focus-visible {
-  outline: 3px solid #1a73e8;                  
+  outline: 3px solid #1a73e8;   /* strong visible focus */
   outline-offset: 2px;
 }
 
-
-.lang-item[aria-pressed="true"] {
-  background: #a6cfc8;                          
-  color: #2f3534;                               
+/* Active/selected state — keep contrast ≥4.5:1 */
+.lang-item.active {
+  background: #a6cfc8;   /* slightly darker bg */
+  color: #2f3534;        /* darker text keeps high contrast */
+  border-color: #7ab8ae; /* subtle border */
 }
+
+/* Separator */
+.lang-sep { margin: 0 .25rem; color: #6b6b6b; }
+
 
 :root {
   --fg-strong: #4a4a4a;    
