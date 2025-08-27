@@ -2277,53 +2277,46 @@ body {
 
 
 
-/* Container */
+
 .lang-switcher {
   display: inline-flex;
   align-items: center;
   gap: .5rem;
 }
 
-/* Decorative icon only */
+
 .lang-icon { width: 18px; height: 18px; }
 
-/* Ensure AA contrast: text #3a3f3e on bg #bfdad5 ≈ ~7:1 */
+
 .lang-item {
-  background: #bfdad5;      /* existing chip bg */
-  color: #3a3f3e;           /* darker text to pass AA comfortably */
+  background: #bfdad5;      
+  color: #000000;           
   border: 1px solid transparent;
   border-radius: 8px;
   padding: .25rem .5rem;
   line-height: 1.2;
-  font-size: 0.875rem;      /* ~14px */
+  font-size: 0.875rem;      
   cursor: pointer;
 }
 
-/* Hover keeps contrast */
-.lang-item:hover { background: #b4d3cd; }  /* still passes with #3a3f3e */
 
-/* Focus visible ring (good contrast) */
+.lang-item:hover { background: #b4d3cd; }  
+
+
 .lang-item:focus-visible {
-  outline: 3px solid #1a73e8;   /* strong visible focus */
+  outline: 3px solid #1a73e8;  
   outline-offset: 2px;
 }
 
-/* Active/selected state — keep contrast ≥4.5:1 */
+
 .lang-item.active {
-  background: #a6cfc8;   /* slightly darker bg */
-  color: #2f3534;        /* darker text keeps high contrast */
-  border-color: #7ab8ae; /* subtle border */
+  background: #a6cfc8;  
+  color: #1c1c1c;       
+  border-color: #7ab8ae; 
 }
 
-/* Separator */
-.lang-sep { margin: 0 .25rem; color: #6b6b6b; }
+
+.lang-sep { margin: 0 .25rem; color: #292929; }
 
 
-:root {
-  --fg-strong: #4a4a4a;    
-  --chip-fg:   #3a3f3e;
-  --chip-bg:   #bfdad5;
-}
-.upload-placeholder { color: var(--fg-strong); }
-.lang-item { color: var(--chip-fg); background: var(--chip-bg); }
-:focus-visible { outline: 3px solid #1a73e8; }
+
