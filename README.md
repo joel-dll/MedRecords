@@ -32,8 +32,8 @@ npm run dev
 
 Important Notes
 
-My Repository (https://github.com/joel-dll/MedRecords.git) does not include API keys or sensitive credentials.
-To run the project locally, you must download Project folder from SOL.
+My Repository (https://github.com/joel-dll/MedRecords.git) does not include API keys or sensitive credentials when download the project (security reasons).
+To run the project locally, you must download Project folder from SOL Portal.
 
 For the fully functional version, use the live deployment:
  https://med-records-navy.vercel.app
