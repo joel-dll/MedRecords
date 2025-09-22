@@ -32,8 +32,8 @@ npm run dev
 
 Important Notes
 
-This repository does not include API keys or sensitive credentials.
-To run the project locally, you must set up your own Firebase and Gemini API keys.
+My Repository (https://github.com/joel-dll/MedRecords.git) does not include API keys or sensitive credentials.
+To run the project locally, you must download Project folder from SOL.
 
 For the fully functional version, use the live deployment:
  https://med-records-navy.vercel.app
