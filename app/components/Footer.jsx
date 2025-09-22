@@ -9,7 +9,8 @@ import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Footer() {
   const [popUpType, setPopUpType] = useState(null);
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
+
   const footerItems = [
     { label: t('marketing.about'), type: 'about' },
     { label: t('marketing.newsletter'), type: 'newsletter' },
@@ -38,14 +39,15 @@ export default function Footer() {
               className="newsletter-form"
               onSubmit={async (e) => {
                 e.preventDefault();
-                const email = e.currentTarget.email.value.trim();
+                const form = e.currentTarget;                    
+                const email = form.email.value.trim();
                 if (!email) return;
                 try {
                   await addDoc(collection(db, 'newsletterEmails'), {
                     email,
                     subscribedAt: serverTimestamp(),
                   });
-                  e.currentTarget.reset();
+                  form.reset();                                   
                   setPopUpType('successMessageNewsletter');
                 } catch (error) {
                   console.error('Error subscribing:', error);
@@ -72,9 +74,10 @@ export default function Footer() {
               className="contact-form"
               onSubmit={async (e) => {
                 e.preventDefault();
-                const name = e.currentTarget.name.value.trim();
-                const email = e.currentTarget.email.value.trim();
-                const message = e.currentTarget.message.value.trim();
+                const form = e.currentTarget;                    
+                const name = form.name.value.trim();
+                const email = form.email.value.trim();
+                const message = form.message.value.trim();
                 if (!name || !email || !message) return;
 
                 try {
@@ -84,7 +87,7 @@ export default function Footer() {
                     message,
                     sentAt: serverTimestamp(),
                   });
-                  e.currentTarget.reset();
+                  form.reset();                                   
                   setPopUpType('successMessage');
                 } catch (error) {
                   console.error('Error sending message:', error);
