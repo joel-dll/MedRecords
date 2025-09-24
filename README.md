@@ -17,23 +17,23 @@ A secure medical records web application built with Next.js and Firebase, includ
 
 ## Getting Started
 
-### 1. Install dependencies
-Make sure you have [Node.js](https://nodejs.org/) installed.  
-Then, install the required packages:
+### Option 1. Download ZIP (quick start)
 
-npm install
+1 - Download the project as a ZIP file and extract it.
+2 - Ensure you have Node.js (v18.18 or later, 20 LTS recommended) installed.
+3 - In the project folder, install dependencies: 
+npm ci
+Start the development server:
+npm run dev
+Open http://localhost:3000 in your browser.
 
-npm firebase 
-
-### 2. Run the development server
-
+### Option 2. Clone with Git (recommended)
+git clone https://github.com/joel-dll/MedRecords.git
+cd MedRecords
+npm ci
 npm run dev
 
 
-Important Notes
-
-My Repository (https://github.com/joel-dll/MedRecords.git) does not include API keys or sensitive credentials when download the project (security reasons).
-To run the project locally, you must download Project folder from SOL Portal.
-
+### Option 3 . Vercel
 For the fully functional version, use the live deployment:
  https://med-records-navy.vercel.app
