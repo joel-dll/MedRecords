@@ -17,7 +17,7 @@ A secure medical records web application built with Next.js and Firebase, includ
 
 ## Getting Started
 
-### Option 1. Download ZIP (quick start)
+### Option 1. Download ZIP file from Solent (With API Credentials)
 
 1- Download the project as a ZIP file and extract it.
 2- Ensure you have Node.js (v18.18 or later, 20 LTS recommended) installed.
@@ -30,7 +30,7 @@ A secure medical records web application built with Next.js and Firebase, includ
 
 5- Open http://localhost:3000 in your browser.
 
-### Option 2. Clone with Git (recommended)
+### Option 2. Clone with Git (No API Credentials - Ai features will no work)
 
 - git clone https://github.com/joel-dll/MedRecords.git
 - cd MedRecords
