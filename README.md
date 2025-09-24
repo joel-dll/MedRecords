@@ -23,6 +23,7 @@ A secure medical records web application built with Next.js and Firebase, includ
 2- Ensure you have Node.js (v18.18 or later, 20 LTS recommended) installed.
 3- In the project folder, install dependencies: 
   - npm ci
+  - npm audit fix --force ( if necessary)
 
 4- Start the development server:
   - npm run dev
