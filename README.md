@@ -41,3 +41,27 @@ A secure medical records web application built with Next.js and Firebase, includ
 ### Option 3 . Vercel
 For the fully functional version, use the live deployment:
  - https://med-records-navy.vercel.app
+
+
+# Maintenance Note — 27 Sep 2025
+
+The packaged project MedRecords-main.zip has been uploaded to the university platform for assessment.
+I can’t modify the ZIP already uploaded.
+
+I had to rotate the Google Generative AI API key today due to the following error when calling Gemini:
+
+[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: fetchFn is not a function
+
+ What changed
+
+Updated .env.local with a new key (API_KEY).
+
+In API routes, changed the model from gemini-1.5-flash to gemini-2.0-flash.
+
+import { GoogleGenerativeAI } from '@google/generative-ai';
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+
+Vercel Deployment: The app is live, updated and functioning correctly on Vercel at https://med-records-navy.vercel.app
+ 
+
