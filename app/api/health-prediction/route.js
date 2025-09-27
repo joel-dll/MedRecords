@@ -43,7 +43,7 @@ export async function POST(req) {
     const name = userDoc.exists() ? userDoc.data().name : 'User';
 
     const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro-latest' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
 const prompt = `
     User: ${name}
