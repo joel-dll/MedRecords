@@ -60,7 +60,7 @@ In API routes, changed the model from gemini-1.5-flash to gemini-2.0.
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+const model = genAI.getGenerativeModel({ model: 'gemini-2.0' });
 
 Vercel Deployment: The app is live, updated and functioning correctly on Vercel at https://med-records-navy.vercel.app
  
