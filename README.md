@@ -56,7 +56,7 @@ I had to rotate the Google Generative AI API key today due to the following erro
 
 Updated .env.local with a new key (API_KEY).
 
-In API routes, changed the model from gemini-1.5-flash to gemini-2.0-flash.
+In API routes, changed the model from gemini-1.5-flash to gemini-2.0.
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
