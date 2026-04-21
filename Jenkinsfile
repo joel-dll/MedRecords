@@ -2,17 +2,16 @@ pipeline {
     agent any
 
     environment {
-        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        PATH = "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     }
 
     stages {
 
-        stage('Checkout') {
-    steps {
-        git branch: 'main', url: 'https://github.com/joel-dll/MedRecords.git'
-    }
-}
-            
+        stage('Check Node') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+            }
         }
 
         stage('Install Dependencies') {
